@@ -1,0 +1,48 @@
+{
+  "name": "node-natural-compare",
+  "version": "0.1.0",
+  "description": "A fast natural string comparison algorithm for Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/woollybogger/node-natural-compare"
+  },
+  "keywords": [
+    "string",
+    "natural",
+    "compare",
+    "comparison",
+    "order",
+    "natcmp",
+    "natcomp",
+    "sort",
+    "natsort",
+    "alphanum"
+  ],
+  "author": "Nathan Woltman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woollybogger/node-natural-compare/issues"
+  },
+  "homepage": "https://github.com/woollybogger/node-natural-compare",
+  "config": {
+    "blanket": {
+      "pattern": [
+        "index.js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-jscs": "~1.8.0",
+    "grunt-jsdoc-to-markdown": "~1.1.0",
+    "grunt-jsonlint": "^1.0.4",
+    "grunt-mocha-cov": "~0.4.0",
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  }
+}
