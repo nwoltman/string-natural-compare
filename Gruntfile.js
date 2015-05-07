@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       }
 
       var fs = require('fs');
-      var code = fs.readFileSync('index.js', {encoding: 'utf8'});
+      var code = fs.readFileSync('natural-compare.js', {encoding: 'utf8'});
       var curVersion = /@version (\d+\.\d+\.\d+)/.exec(code)[1];
       var date = new Date().toISOString().slice(0, 10);
       var versionHeader = '## ' + curVersion + ' (' + date + ')\n';

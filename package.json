@@ -1,14 +1,14 @@
 {
-  "name": "node-natural-compare",
+  "name": "string-natural-compare",
   "version": "0.1.0",
   "description": "A fast natural string comparison algorithm for Node",
-  "main": "index.js",
+  "main": "natural-compare.js",
   "scripts": {
     "test": "grunt"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/woollybogger/node-natural-compare"
+    "url": "https://github.com/woollybogger/string-natural-compare"
   },
   "keywords": [
     "string",
@@ -18,20 +18,23 @@
     "order",
     "natcmp",
     "natcomp",
+    "strnatcmp",
+    "strnatcomp",
     "sort",
     "natsort",
-    "alphanum"
+    "alphanum",
+    "alphanumeric"
   ],
   "author": "Nathan Woltman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/woollybogger/node-natural-compare/issues"
+    "url": "https://github.com/woollybogger/string-natural-compare/issues"
   },
-  "homepage": "https://github.com/woollybogger/node-natural-compare",
+  "homepage": "https://github.com/woollybogger/string-natural-compare",
   "config": {
     "blanket": {
       "pattern": [
-        "index.js"
+        "natural-compare.js"
       ]
     }
   },
