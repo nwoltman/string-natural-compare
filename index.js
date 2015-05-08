@@ -13,8 +13,8 @@
   var alphabet;
   var alphabetIndexMap;
 
-  function isNumber(c) {
-    return c >= '0' && c <= '9';
+  function isNumberCode(code) {
+    return code >= 48 && code <= 57;
   }
 
   function naturalCompare(a, b) {
@@ -29,8 +29,8 @@
       var charA = a[i];
       var charB = b[j];
 
-      if (isNumber(charA)) {
-        if (!isNumber(charB)) {
+      if (isNumberCode(charA.charCodeAt(0))) {
+        if (!isNumberCode(charB.charCodeAt(0))) {
           return charA < charB ? -1 : 1;
         }
 
@@ -43,10 +43,10 @@
         var numEndA = numStartA;
         var numEndB = numStartB;
 
-        while (numEndA < lengthA && isNumber(a[numEndA])) {
+        while (numEndA < lengthA && isNumberCode(a.charCodeAt(numEndA))) {
           ++numEndA;
         }
-        while (numEndB < lengthB && isNumber(b[numEndB])) {
+        while (numEndB < lengthB && isNumberCode(b.charCodeAt(numEndB))) {
           ++numEndB;
         }
 
