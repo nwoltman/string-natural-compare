@@ -68,3 +68,21 @@ a.sort(function(a, b) {
   return String.naturalCompare(a.sort_key, b.sort_key);
 });
 ```
+
+### Custom Alphabet
+
+It is possible to configure a custom alphabet to achieve a desired character ordering.
+
+```js
+// Estonian alphabet
+String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+['t', 'z', 'x', 'õ'].sort(String.naturalCompare);
+// -> ['z', 't', 'õ', 'x']
+
+// Russian alphabet
+String.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
+['Ё', 'А', 'Б'].sort(String.naturalCompare);
+// -> ['А', 'Б', 'Ё']
+```
+
+**Note:** Putting numbers in the custom alphabet can cause undefined behaviour.
