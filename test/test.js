@@ -18,10 +18,10 @@ should.Assertion.add('lessThan', function(value, message) {
   should.ok(this.obj < value, message);
 });
 
-function verify(testData, index) {
+function verify(testData) {
   var a = testData[0];
   var b = testData[2];
-  var failMessage = 'failure at index: ' + index;
+  var failMessage = 'failure on input: [' + testData.join(' ') + ']';
 
   switch (testData[1]) {
     case '=':
