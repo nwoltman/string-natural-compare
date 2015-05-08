@@ -1,7 +1,7 @@
 {
   "name": "string-natural-compare",
   "version": "0.1.0",
-  "description": "A fast natural string comparison algorithm for Node",
+  "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
   "main": "index.js",
   "scripts": {
     "test": "grunt"
@@ -34,7 +34,7 @@
   "config": {
     "blanket": {
       "pattern": [
-        "natural-compare.js"
+        "index.js"
       ]
     }
   },
