@@ -2,7 +2,7 @@
   "name": "string-natural-compare",
   "version": "0.1.0",
   "description": "A fast natural string comparison algorithm for Node",
-  "main": "natural-compare.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt"
   },
@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-uglify": "0.9.1",
     "grunt-jscs": "~1.8.0",

@@ -3,7 +3,7 @@
 /* jshint expr: true */
 /* global describe: true, it: true */
 
-require('../natural-compare');
+require('../');
 var should = require('should');
 
 should.Assertion.add('greaterThan', function(value, message) {

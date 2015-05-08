@@ -49,13 +49,20 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      main: {
+        src: 'index.js',
+        dest: 'dist/natural-compare.js',
+      },
+    },
+
     uglify: {
       options: {
         banner: '/*! Natural Compare v<%= pkg.version %> | (c) 2015 Nathan Woltman | <%= pkg.repository.url %> */\n',
         screwIE8: true
       },
       build: {
-        src: 'natural-compare.js',
+        src: 'index.js',
         dest: 'dist/natural-compare.min.js'
       }
     }
@@ -66,13 +73,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-mocha-cov');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Register tasks
   grunt.registerTask('lint', ['jsonlint', 'jshint', 'jscs']);
   grunt.registerTask('test', ['mochacov:test'].concat(process.env.CI ? ['mochacov:testAndCoverage'] : []));
   grunt.registerTask('coverage', ['mochacov:coverage']);
-  grunt.registerTask('default', ['lint', 'test', 'uglify']);
+  grunt.registerTask('build', ['copy', 'uglify']);
+  grunt.registerTask('default', ['lint', 'test', 'build']);
 
   grunt.registerTask('changelog', 'Add the changes since the last release to the changelog', function() {
     var done = this.async();
@@ -89,7 +98,7 @@ module.exports = function(grunt) {
       }
 
       var fs = require('fs');
-      var code = fs.readFileSync('natural-compare.js', {encoding: 'utf8'});
+      var code = fs.readFileSync('index.js', {encoding: 'utf8'});
       var curVersion = /@version (\d+\.\d+\.\d+)/.exec(code)[1];
       var date = new Date().toISOString().slice(0, 10);
       var versionHeader = '## ' + curVersion + ' (' + date + ')\n';
