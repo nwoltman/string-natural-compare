@@ -37,16 +37,8 @@
         var numStartA = i;
         var numStartB = j;
 
-        while (a[numStartA] === '0') {
-          ++numStartA;
-          if (numStartA === lengthA)
-            break;
-        }
-        while (b[numStartB] === '0') {
-          ++numStartB;
-          if (numStartB === lengthB)
-            break;
-        }
+        while (a[numStartA] === '0' && ++numStartA < lengthA);
+        while (b[numStartB] === '0' && ++numStartB < lengthB);
 
         var numEndA = numStartA;
         var numEndB = numStartB;
@@ -58,20 +50,26 @@
           ++numEndB;
         }
 
-        var numA = a.slice(numStartA, numEndA);
-        var numB = b.slice(numStartB, numEndB);
+        var numLengthA = numEndA - numStartA;
+        var numLengthB = numEndB - numStartB;
 
-        if (numA.length < numB.length) {
+        if (numLengthA < numLengthB) {
           return -1;
         }
-        if (numA.length > numB.length) {
+        if (numLengthA > numLengthB) {
           return 1;
         }
-        if (numA < numB) {
-          return -1;
-        }
-        if (numA > numB) {
-          return 1;
+
+        if (numLengthA) {
+          var numA = a.slice(numStartA, numEndA);
+          var numB = b.slice(numStartB, numEndB);
+
+          if (numA < numB) {
+            return -1;
+          }
+          if (numA > numB) {
+            return 1;
+          }
         }
 
         i = numEndA;
