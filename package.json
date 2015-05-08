@@ -1,6 +1,6 @@
 {
   "name": "string-natural-compare",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
   "main": "index.js",
   "scripts": {
