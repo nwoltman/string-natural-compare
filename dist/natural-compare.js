@@ -119,7 +119,7 @@
     },
     naturalCaseCompare: {
       value: function(a, b) {
-        return naturalCompare((a + '').toLowerCase(), (b + '').toLowerCase());
+        return naturalCompare(('' + a).toLowerCase(), ('' + b).toLowerCase());
       },
       configurable: true,
       writable: true
