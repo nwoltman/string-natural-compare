@@ -49,16 +49,33 @@ Include the script in your HTML (drop the ".min" to use the development version)
 
 ## Usage
 
+Natural Compare makes two functions available on the global `String` object:
+
++ `String.naturalCompare` (case-sensitive)
++ `String.naturalCaseCompare` (case-insensitive)
+
+Examples:
+
 ```js
-// Simple case-sensitive example
+// Simple case-sensitive sorting
 var a = ['z1.doc', 'z10.doc', 'z17.doc', 'z2.doc', 'z23.doc', 'z3.doc'];
 a.sort(String.naturalCompare);
 // -> ['z1.doc', 'z2.doc', 'z3.doc', 'z10.doc', 'z17.doc', 'z23.doc']
 
-// Simple case-insensitive example
+
+// Simple case-insensitive sorting
 var a = ['B', 'C', 'a', 'd'];
 a.sort(String.naturalCaseCompare);
 // -> ['a', 'B', 'C', 'd']
+
+
+// Compare very large numbers as strings (or strings containing long, numeric substrings)
+String.naturalCompare(
+  '1165874568735487968325787328996865',
+  '1165874568735487968325787328996864'
+);
+// -> 1
+
 
 // In most cases we want to sort an array of objects
 var a = [
@@ -71,13 +88,14 @@ a.sort(function(a, b) {
   return String.naturalCompare(a.street, b.street) || String.naturalCompare(a.room, b.room);
 });
 
+
 // When text transformation is needed or when doing a case-insensitive sort on a
 // large array, it is best for performance to pre-compute the transformed text
 // and store it in that object. This way, the text transformation will not be
 // needed for every comparison when sorting.
 var a = [
-  {make: 'Audi', model: 'A6'},
-  {make: 'Kia',  model: 'Rio'}
+  {make: 'Audi', model: 'R8'},
+  {make: 'Porsche', model: '911 Turbo S'}
 ];
 
 // Sort by make, then by model
