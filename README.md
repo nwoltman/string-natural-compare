@@ -1,4 +1,4 @@
-# Natural Compare
+# String Natural Compare
 
 Compare alphanumeric strings the same way a human would, using a natural order algorithm
 
@@ -6,8 +6,30 @@ Compare alphanumeric strings the same way a human would, using a natural order a
 ![Bower Version](https://img.shields.io/bower/v/string-natural-compare.svg)
 [![Build Status](https://travis-ci.org/woollybogger/string-natural-compare.svg?branch=master)](https://travis-ci.org/woollybogger/string-natural-compare)
 [![Coverage Status](https://coveralls.io/repos/woollybogger/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/woollybogger/string-natural-compare?branch=master)
-[![Dependency Status](https://david-dm.org/woollybogger/string-natural-compare.svg)](https://david-dm.org/woollybogger/string-natural-compare)
 [![devDependency Status](https://david-dm.org/woollybogger/string-natural-compare/dev-status.svg)](https://david-dm.org/woollybogger/string-natural-compare#info=devDependencies)
+
+```
+Standard sorting:   Natural order sorting:
+    img1.png            img1.png
+    img10.png           img2.png
+    img12.png           img10.png
+    img2.png            img12.png
+```
+
+This module makes two functions available on the global `String` object:
+
++ `String.naturalCompare` (case-sensitive)
++ `String.naturalCaseCompare` (case-insensitive)
+
+These functions return a number indicating whether one string should come before, after, or is the same as another string.
+They can be easily used with the native [`.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) array method.
+
+### Fast and Robust
+
+This module uses an extremely performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding what can be contained in a 64-bit integer). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
+
++ [jsPerf - natsort()](http://jsperf.com/natsort/2)
++ [jsPerf - natsort() with custom alphabet](http://jsperf.com/natsort-custom-alphabet)
 
 
 ## Installation
@@ -26,8 +48,6 @@ require('string-natural-compare');
 
 #### Bower:
 
-Get the package:
-
 ```sh
 bower install string-natural-compare
 ```
@@ -36,25 +56,16 @@ Include the script in your HTML (drop the ".min" to use the development version)
 
 ```html
 <script src="/bower_components/string-natural-compare/dist/natural-compare.min.js"></script>
-``` 
+```
 
-#### Plain HTML:
+**Note:** IE8 and lower not supported.
 
-[Download](https://rawgit.com/woollybogger/string-natural-compare/master/dist/natural-compare.min.js) the script and include it in your page:
+#### Download:
 
-```html
-<script src="natural-compare.min.js"></script>
-``` 
+Production and development versions can be found [here](https://github.com/woollybogger/string-natural-compare/tree/master/dist) and can be included in your page similar to the HTML example above.
 
 
 ## Usage
-
-Natural Compare makes two functions available on the global `String` object:
-
-+ `String.naturalCompare` (case-sensitive)
-+ `String.naturalCaseCompare` (case-insensitive)
-
-Examples:
 
 ```js
 // Simple case-sensitive sorting
