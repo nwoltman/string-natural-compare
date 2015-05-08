@@ -118,6 +118,13 @@
       value: naturalCompare,
       configurable: true,
       writable: true
+    },
+    naturalCaseCompare: {
+      value: function(a, b) {
+        return naturalCompare((a + '').toLowerCase(), (b + '').toLowerCase());
+      },
+      configurable: true,
+      writable: true
     }
   });
 

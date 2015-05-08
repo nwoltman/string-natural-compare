@@ -26,19 +26,22 @@ function verify(testData, index) {
   switch (testData[1]) {
     case '=':
       String.naturalCompare(a, b).should.equal(0, failMessage);
+      String.naturalCaseCompare(a, b).should.equal(0, failMessage);
       break;
     case '>':
       String.naturalCompare(a, b).should.be.greaterThan(0, failMessage);
+      String.naturalCaseCompare(a, b).should.be.greaterThan(0, failMessage);
       break;
     case '<':
       String.naturalCompare(a, b).should.be.lessThan(0, failMessage);
+      String.naturalCaseCompare(a, b).should.be.lessThan(0, failMessage);
       break;
     default:
       should.ok(false, 'Unknown expected result: ' + testData[1]);
   }
 }
 
-describe('String.naturalCompare', function() {
+describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
   it('should compare strings that do not contain numbers', function() {
     [
       ['a', '=', 'a'],
@@ -149,6 +152,13 @@ describe('String.naturalCompare', function() {
       ],
     ].forEach(verify);
   });
+});
+
+describe('String.naturalCompare()', function() {
+  it('should perform case-sensitive comparisons', function() {
+    String.naturalCompare('a', 'A').should.be.greaterThan(0);
+    String.naturalCompare('b', 'C').should.be.greaterThan(0);
+  });
 
   it('should function correctly as the callback to array.sort()', function() {
     ['a', 'c', 'b', 'd']
@@ -200,6 +210,32 @@ describe('String.naturalCompare', function() {
       .sort(String.naturalCompare)
       .join('')
       .should.equal('12910ABŠXazuõäД');
+
+    // Don't mess up other tests
+    String.alphabet = '';
+  });
+});
+
+describe('String.naturalCaseCompare()', function() {
+  it('should perform case-insensitive comparisons', function() {
+    String.naturalCaseCompare('a', 'A').should.equal(0);
+    String.naturalCaseCompare('b', 'C').should.be.lessThan(0);
+  });
+
+  it('should function correctly as the callback to array.sort()', function() {
+    ['C', 'B', 'a', 'd']
+      .sort(String.naturalCaseCompare)
+      .join('')
+      .should.equal('aBCd');
+  });
+
+  it('should compare strings using the provided alphabet', function() {
+    String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+
+    ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
+      .sort(String.naturalCaseCompare)
+      .join('')
+      .should.equal('12910aBŠzuõäÜXД');
   });
 });
 
@@ -207,11 +243,6 @@ describe('String.alphabet', function() {
   it('can be set and retrieved', function() {
     String.alphabet = 'cba';
     String.alphabet.should.equal('cba');
-  });
-
-  it('can be changed', function() {
-    String.alphabet = 'abcd';
-    String.alphabet.should.equal('abcd');
   });
 
   it('can be set to null', function() {

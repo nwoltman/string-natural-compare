@@ -31,15 +31,15 @@ require('string-natural-compare');
 ## Usage
 
 ```js
-// Simple case sensitive example
+// Simple case-sensitive example
 var a = ['z1.doc', 'z10.doc', 'z17.doc', 'z2.doc', 'z23.doc', 'z3.doc'];
 a.sort(String.naturalCompare);
 // -> ['z1.doc', 'z2.doc', 'z3.doc', 'z10.doc', 'z17.doc', 'z23.doc']
 
-// Use wrapper function for case insensitivity
-a.sort(function(a, b){
-  return String.naturalCompare(a.toLowerCase(), b.toLowerCase());
-});
+// Simple case-insensitive example
+var a = ['B', 'C', 'a', 'd'];
+a.sort(String.naturalCaseCompare);
+// -> ['a', 'B', 'C', 'd']
 
 // In most cases we want to sort an array of objects
 var a = [
@@ -52,9 +52,10 @@ a.sort(function(a, b) {
   return String.naturalCompare(a.street, b.street) || String.naturalCompare(a.room, b.room);
 });
 
-// When text transformation is needed (e.g. toLowerCase()), it is best for
-// performance to keep the transformed key in that object. That way, the
-// text transformation will not be needed for every comparison when sorting.
+// When text transformation is needed or when doing a case-insensitive sort on a
+// large array, it is best for performance to pre-compute the transformed text
+// and store it in that object. This way, the text transformation will not be
+// needed for every comparison when sorting.
 var a = [
   {make: 'Audi', model: 'A6'},
   {make: 'Kia',  model: 'Rio'}
