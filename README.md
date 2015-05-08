@@ -17,6 +17,8 @@ Compare alphanumeric strings the same way a human would, using a natural order a
 npm install string-natural-compare --save
 ```
 
+Then in your JS:
+
 ```js
 require('string-natural-compare');
 ```
