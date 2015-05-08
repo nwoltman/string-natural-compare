@@ -25,7 +25,7 @@
     "alphanum",
     "alphanumeric"
   ],
-  "author": "Nathan Woltman",
+  "author": "Nathan Woltman <nwoltman@outlook.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/woollybogger/string-natural-compare/issues"

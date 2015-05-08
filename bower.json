@@ -1,0 +1,33 @@
+{
+  "name": "string-natural-compare",
+  "main": "dist/natural-compare.min.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/woollybogger/string-natural-compare",
+  "authors": [
+    "Nathan Woltman <nwoltman@outlook.com>"
+  ],
+  "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
+  "keywords": [
+    "string",
+    "natural",
+    "compare",
+    "comparison",
+    "order",
+    "natcmp",
+    "natcomp",
+    "strnatcmp",
+    "strnatcomp",
+    "sort",
+    "natsort",
+    "alphanum",
+    "alphanumeric"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "*.*",
+    "node_modules",
+    "bower_components",
+    "coverage",
+    "test"
+  ]
+}

@@ -3,6 +3,7 @@
 Compare alphanumeric strings the same way a human would, using a natural order algorithm
 
 [![NPM Version](https://img.shields.io/npm/v/string-natural-compare.svg)](https://www.npmjs.com/package/string-natural-compare)
+![Bower Version](https://img.shields.io/bower/v/string-natural-compare.svg)
 [![Build Status](https://travis-ci.org/woollybogger/string-natural-compare.svg?branch=master)](https://travis-ci.org/woollybogger/string-natural-compare)
 [![Coverage Status](https://coveralls.io/repos/woollybogger/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/woollybogger/string-natural-compare?branch=master)
 [![Dependency Status](https://david-dm.org/woollybogger/string-natural-compare.svg)](https://david-dm.org/woollybogger/string-natural-compare)
@@ -23,7 +24,23 @@ Then in your JS:
 require('string-natural-compare');
 ```
 
-#### Browser:
+#### Bower:
+
+Get the package:
+
+```sh
+bower install string-natural-compare
+```
+
+Include the script in your HTML (drop the ".min" to use the development version):
+
+```html
+<script src="/bower_components/string-natural-compare/dist/natural-compare.min.js"></script>
+``` 
+
+#### Plain HTML:
+
+[Download](https://rawgit.com/woollybogger/string-natural-compare/master/dist/natural-compare.min.js) the script and include it in your page:
 
 ```html
 <script src="natural-compare.min.js"></script>
