@@ -26,7 +26,7 @@ They can be easily used with the native [`.sort()`](https://developer.mozilla.or
 
 ### Fast and Robust
 
-This module uses an extremely performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding what can be contained in a 64-bit integer). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
+This module uses a performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding what can be contained in a 64-bit integer). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
 
 + [jsPerf - natsort()](http://jsperf.com/natsort/2)
 + [jsPerf - natsort() with custom alphabet](http://jsperf.com/natsort-custom-alphabet)
@@ -83,7 +83,7 @@ a.sort(String.naturalCaseCompare);
 // Compare very large numbers as strings (or strings containing long, numeric substrings)
 String.naturalCompare(
   '1165874568735487968325787328996865',
-  '1165874568735487968325787328996864'
+  '265812277985321589735871687040841'
 );
 // -> 1
 
@@ -111,10 +111,10 @@ var a = [
 
 // Sort by make, then by model
 a = a.map(function(car) {
-  car.sort_key = (car.make + ' ' + car.model).toLowerCase();
+  car.sortKey = (car.make + ' ' + car.model).toLowerCase();
 });
 a.sort(function(a, b) {
-  return String.naturalCompare(a.sort_key, b.sort_key);
+  return String.naturalCompare(a.sortKey, b.sortKey);
 });
 ```
 
@@ -130,8 +130,8 @@ String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuv�
 
 // Russian alphabet
 String.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-['Ё', 'А', 'Б'].sort(String.naturalCompare);
-// -> ['А', 'Б', 'Ё']
+['Ё', 'А', 'б', 'Б'].sort(String.naturalCompare);
+// -> ['А', 'Б', 'Ё', 'б']
 ```
 
 **Note:** Putting numbers in the custom alphabet can cause undefined behaviour.
