@@ -80,7 +80,7 @@ a.sort(String.naturalCaseCompare);
 // -> ['a', 'B', 'C', 'd']
 
 
-// Compare very large numbers as strings (or strings containing long, numeric substrings)
+// Compare strings containing large numbers
 String.naturalCompare(
   '1165874568735487968325787328996865',
   '265812277985321589735871687040841'
@@ -94,9 +94,12 @@ var a = [
   {street: '350 5th Ave', room: 'A-21046-b'}
 ];
 
-// Sort by street, then by room
+// Sort by street (case-insensitive), then by room (case-sensitive)
 a.sort(function(a, b) {
-  return String.naturalCompare(a.street, b.street) || String.naturalCompare(a.room, b.room);
+  return (
+    String.naturalCompare(a.street.toLowerCase(), b.street.toLowerCase()) ||
+    String.naturalCompare(a.room, b.room)
+  );
 });
 
 
