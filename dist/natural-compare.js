@@ -12,6 +12,7 @@
 
   var alphabet;
   var alphabetIndexMap;
+  var alphabetIndexMapLength = 0;
 
   function isNumberCode(code) {
     return code >= 48 && code <= 57;
@@ -31,7 +32,7 @@
 
       if (isNumberCode(charCodeA)) {
         if (!isNumberCode(charCodeB)) {
-          return charCodeA < charCodeB ? -1 : 1;
+          return charCodeA - charCodeB;
         }
 
         var numStartA = aIndex;
@@ -81,18 +82,18 @@
         continue;
       }
 
-      if (
-        alphabet &&
-        (alphabetIndexA = alphabetIndexMap[charCodeA]) !== undefined &&
-        (alphabetIndexB = alphabetIndexMap[charCodeB]) !== undefined
-      ) {
-        if ((alphabetIndexA -= alphabetIndexB)) {
-          return alphabetIndexA;
+      if (charCodeA !== charCodeB) {
+        if (
+          alphabetIndexMapLength &&
+          charCodeA < alphabetIndexMapLength &&
+          charCodeB < alphabetIndexMapLength &&
+          (alphabetIndexA = alphabetIndexMap[charCodeA]) !== -1 &&
+          (alphabetIndexB = alphabetIndexMap[charCodeB]) !== -1
+        ) {
+          return alphabetIndexA - alphabetIndexB;
         }
-      } else if (charCodeA < charCodeB) {
-        return -1;
-      } else if (charCodeA > charCodeB) {
-        return 1;
+
+        return charCodeA - charCodeB;
       }
 
       ++aIndex;
@@ -110,9 +111,16 @@
       set: function(value) {
         alphabet = value;
         alphabetIndexMap = [];
-        if (!alphabet) return;
-        for (var i = 0; i < alphabet.length; i++) {
-          alphabetIndexMap[alphabet.charCodeAt(i)] = i;
+        var i = 0;
+        if (alphabet) {
+          for (; i < alphabet.length; i++) {
+            alphabetIndexMap[alphabet.charCodeAt(i)] = i;
+          }
+        }
+        alphabetIndexMapLength = alphabetIndexMap.length;
+        for (i = 0; i < alphabetIndexMapLength; i++) {
+          if (i in alphabetIndexMap) continue;
+          alphabetIndexMap[i] = -1;
         }
       }
     },

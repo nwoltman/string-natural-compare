@@ -32,7 +32,7 @@
 
       if (isNumberCode(charCodeA)) {
         if (!isNumberCode(charCodeB)) {
-          return charCodeA < charCodeB ? -1 : 1;
+          return charCodeA - charCodeB;
         }
 
         var numStartA = aIndex;
@@ -93,7 +93,7 @@
           return alphabetIndexA - alphabetIndexB;
         }
 
-        return charCodeA < charCodeB ? -1 : 1;
+        return charCodeA - charCodeB;
       }
 
       ++aIndex;
