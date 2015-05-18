@@ -20,25 +20,29 @@
   function naturalCompare(a, b) {
     var lengthA = (a += '').length;
     var lengthB = (b += '').length;
-    var i = 0;
-    var j = 0;
+    var aIndex = 0;
+    var bIndex = 0;
     var alphabetIndexA;
     var alphabetIndexB;
 
-    while (i < lengthA && j < lengthB) {
-      var charA = a[i];
-      var charB = b[j];
+    while (aIndex < lengthA && bIndex < lengthB) {
+      var charCodeA = a.charCodeAt(aIndex);
+      var charCodeB = b.charCodeAt(bIndex);
 
-      if (isNumberCode(charA.charCodeAt(0))) {
-        if (!isNumberCode(charB.charCodeAt(0))) {
-          return charA < charB ? -1 : 1;
+      if (isNumberCode(charCodeA)) {
+        if (!isNumberCode(charCodeB)) {
+          return charCodeA < charCodeB ? -1 : 1;
         }
 
-        var numStartA = i;
-        var numStartB = j;
+        var numStartA = aIndex;
+        var numStartB = bIndex;
 
-        while (a[numStartA] === '0' && ++numStartA < lengthA);
-        while (b[numStartB] === '0' && ++numStartB < lengthB);
+        while (charCodeA === 48 && ++numStartA < lengthA) {
+          charCodeA = a.charCodeAt(numStartA);
+        }
+        while (charCodeB === 48 && ++numStartB < lengthB) {
+          charCodeB = b.charCodeAt(numStartB);
+        }
 
         var numEndA = numStartA;
         var numEndB = numStartB;
@@ -72,27 +76,27 @@
           }
         }
 
-        i = numEndA;
-        j = numEndB;
+        aIndex = numEndA;
+        bIndex = numEndB;
         continue;
       }
 
       if (
         alphabet &&
-        (alphabetIndexA = alphabetIndexMap[charA]) !== undefined &&
-        (alphabetIndexB = alphabetIndexMap[charB]) !== undefined
+        (alphabetIndexA = alphabetIndexMap[charCodeA]) !== undefined &&
+        (alphabetIndexB = alphabetIndexMap[charCodeB]) !== undefined
       ) {
         if ((alphabetIndexA -= alphabetIndexB)) {
           return alphabetIndexA;
         }
-      } else if (charA < charB) {
+      } else if (charCodeA < charCodeB) {
         return -1;
-      } else if (charA > charB) {
+      } else if (charCodeA > charCodeB) {
         return 1;
       }
 
-      ++i;
-      ++j;
+      ++aIndex;
+      ++bIndex;
     }
 
     return lengthA - lengthB;
@@ -105,10 +109,10 @@
       },
       set: function(value) {
         alphabet = value;
-        alphabetIndexMap = {};
+        alphabetIndexMap = [];
         if (!alphabet) return;
         for (var i = 0; i < alphabet.length; i++) {
-          alphabetIndexMap[alphabet[i]] = i;
+          alphabetIndexMap[alphabet.charCodeAt(i)] = i;
         }
       }
     },
