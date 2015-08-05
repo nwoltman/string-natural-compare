@@ -122,20 +122,20 @@
           if (i in alphabetIndexMap) continue;
           alphabetIndexMap[i] = -1;
         }
-      }
+      },
     },
     naturalCompare: {
       value: naturalCompare,
       configurable: true,
-      writable: true
+      writable: true,
     },
     naturalCaseCompare: {
       value: function(a, b) {
         return naturalCompare(('' + a).toLowerCase(), ('' + b).toLowerCase());
       },
       configurable: true,
-      writable: true
-    }
+      writable: true,
+    },
   });
 
 })();

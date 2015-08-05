@@ -1,3 +1,5 @@
+// jscs:disable requireTrailingComma
+
 module.exports = function(grunt) {
   'use strict';
 

@@ -54,7 +54,7 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
       ['aa', '<', 'b'],
       ['b', '>', 'aa'],
       ['aa', '<', 'ba'],
-      ['ba', '>', 'aa']
+      ['ba', '>', 'aa'],
     ].forEach(verify);
   });
 
@@ -83,7 +83,7 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
       ['a1a', '<', 'a11'],
       ['a11', '>', 'a1a'],
       ['a1a', '<', 'a11a'],
-      ['a11a', '>', 'a1a']
+      ['a11a', '>', 'a1a'],
     ].forEach(verify);
   });
 
@@ -93,7 +93,7 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
       ['a 0 a', '<', 'a 0 b'],
       ['a 0 a', '<', 'a 00 b'],
       ['a0a', '<', 'a0b'],
-      ['a0a', '<', 'a00b']
+      ['a0a', '<', 'a00b'],
     ].forEach(verify);
   });
 
@@ -113,7 +113,7 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
       ['0.01', '<', '0.001'],
       ['0.001', '>', '0.01'],
       ['1.01', '<', '1.001'],
-      ['1.001', '>', '1.01']
+      ['1.001', '>', '1.01'],
     ].forEach(verify);
   });
 
@@ -129,7 +129,7 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
         {toString: function() { return 'a'; }},
         '<',
         {toString: function() { return 'b'; }},
-      ]
+      ],
     ].forEach(verify);
   });
 
@@ -138,17 +138,17 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
       [
         '1165874568735487968325787328996864',
         '=',
-        '1165874568735487968325787328996864'
+        '1165874568735487968325787328996864',
       ],
       [
         '1165874568735487968325787328996864',
         '<',
-        '1165874568735487968325787328996865'
+        '1165874568735487968325787328996865',
       ],
       [
         '1165874568735487968325787328996864',
         '>',
-        '216587456873548796832578732899686'
+        '216587456873548796832578732899686',
       ],
     ].forEach(verify);
   });
@@ -187,7 +187,7 @@ describe('String.naturalCompare()', function() {
       'a00a.html',
       'a0001a.html',
       'a001a.html',
-      'a1a.html'
+      'a1a.html',
     ].sort(String.naturalCompare).toString().should.equal(
       'a0,' +
       'a00,' +
