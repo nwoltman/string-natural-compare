@@ -34,7 +34,7 @@
   "config": {
     "blanket": {
       "pattern": [
-        "string-natural-compare/index.js"
+        "string-natural-compare/natural-compare.js"
       ]
     }
   },
