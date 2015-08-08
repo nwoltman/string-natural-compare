@@ -26,7 +26,7 @@ They can be easily used with the native [`.sort()`](https://developer.mozilla.or
 
 ### Fast and Robust
 
-This module uses a performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding what can be contained in a 64-bit integer). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
+This module uses a performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding JavaScript's [`MAX_SAFE_INTEGER`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
 
 + [jsPerf - natsort()](http://jsperf.com/natsort/2)
 + [jsPerf - natsort() with custom alphabet](http://jsperf.com/natsort-custom-alphabet)
@@ -55,14 +55,10 @@ bower install string-natural-compare
 Include the script in your HTML (drop the ".min" to use the development version):
 
 ```html
-<script src="/bower_components/string-natural-compare/dist/natural-compare.min.js"></script>
+<script src="/bower_components/string-natural-compare/natural-compare.min.js"></script>
 ```
 
 **Note:** IE8 and lower not supported.
-
-#### Download:
-
-Production and development versions can be found [here](https://github.com/woollybogger/string-natural-compare/tree/master/dist) and can be included in your page similar to the HTML example above.
 
 
 ## Usage

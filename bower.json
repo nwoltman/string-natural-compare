@@ -1,6 +1,6 @@
 {
   "name": "string-natural-compare",
-  "main": "dist/natural-compare.min.js",
+  "main": "natural-compare.min.js",
   "version": "1.1.0",
   "homepage": "https://github.com/woollybogger/string-natural-compare",
   "authors": [

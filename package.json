@@ -2,7 +2,7 @@
   "name": "string-natural-compare",
   "version": "1.1.0",
   "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
-  "main": "index.js",
+  "main": "natural-compare.js",
   "scripts": {
     "test": "grunt"
   },

@@ -16,13 +16,14 @@ module.exports = function(grunt) {
       all: {
         src: ['*.js', 'test/*.js'],
         options: {
-          jshintrc: true
+          jshintrc: true,
+          ignores: ['*.min*']
         }
       }
     },
 
     jscs: {
-      all: ['*.js', 'test/*.js'],
+      all: ['Gruntfile.js', 'natural-compare.js', 'test/*.js'],
       options: {
         config: '.jscsrc'
       }
@@ -51,21 +52,14 @@ module.exports = function(grunt) {
       }
     },
 
-    copy: {
-      main: {
-        src: 'index.js',
-        dest: 'dist/natural-compare.js',
-      },
-    },
-
     uglify: {
       options: {
         banner: '/*! Natural Compare v<%= pkg.version %> | (c) 2015 Nathan Woltman | <%= pkg.repository.url %> */\n',
         screwIE8: true
       },
       build: {
-        src: 'index.js',
-        dest: 'dist/natural-compare.min.js'
+        src: 'natural-compare.js',
+        dest: 'natural-compare.min.js'
       }
     }
   });
@@ -75,13 +69,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-mocha-cov');
-  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Register tasks
   grunt.registerTask('lint', ['jsonlint', 'jshint', 'jscs']);
   grunt.registerTask('test', ['mochacov:test'].concat(process.env.CI ? ['mochacov:testAndCoverage'] : []));
   grunt.registerTask('coverage', ['mochacov:coverage']);
-  grunt.registerTask('build', ['copy', 'uglify']);
+  grunt.registerTask('build', ['uglify']);
   grunt.registerTask('default', ['lint', 'test', 'build']);
 };
