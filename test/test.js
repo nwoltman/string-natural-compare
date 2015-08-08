@@ -1,7 +1,6 @@
 'use strict';
 
-/* jshint expr: true */
-/* global describe: true, it: true */
+/* jshint mocha: true */
 
 require('../');
 var should = require('should');
