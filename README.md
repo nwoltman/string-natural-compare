@@ -109,7 +109,7 @@ var a = [
 ];
 
 // Sort by make, then by model
-a = a.map(function(car) {
+a.forEach(function(car) {
   car.sortKey = (car.make + ' ' + car.model).toLowerCase();
 });
 a.sort(function(a, b) {
