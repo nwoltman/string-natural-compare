@@ -58,6 +58,7 @@
   ],
   "requireDotNotation": true,
   "requireLineFeedAtFileEnd": true,
+  "requirePaddingNewLinesAfterUseStrict": true,
   "requireParenthesesAroundIIFE": true,
   "requireSpaceAfterBinaryOperators": [
     "+",

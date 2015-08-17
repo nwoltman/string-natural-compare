@@ -43,10 +43,10 @@
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-uglify": "0.9.1",
-    "grunt-jscs": "~2.0.0",
+    "grunt-jscs": "~2.1.0",
     "grunt-jsonlint": "^1.0.4",
     "grunt-mocha-cov": "~0.4.0",
     "mocha": "^2.2.5",
-    "should": "^7.0.2"
+    "should": "^7.0.4"
   }
 }
