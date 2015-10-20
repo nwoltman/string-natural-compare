@@ -162,18 +162,15 @@ describe('String.naturalCompare()', function() {
   it('should function correctly as the callback to array.sort()', function() {
     ['a', 'c', 'b', 'd']
       .sort(String.naturalCompare)
-      .join('')
-      .should.equal('abcd');
+      .should.deepEqual(['a', 'b', 'c', 'd']);
 
     ['file-2.txt', 'file-1.txt', 'file-20.txt', 'file-3.txt']
       .sort(String.naturalCompare)
-      .toString()
-      .should.equal('file-1.txt,file-2.txt,file-3.txt,file-20.txt');
+      .should.deepEqual(['file-1.txt', 'file-2.txt', 'file-3.txt', 'file-20.txt']);
 
     [-1, 1, -2, 2, -10, 10, -11, 11, -100, 100]
       .sort(String.naturalCompare)
-      .toString()
-      .should.equal('-1,-2,-10,-11,-100,1,2,10,11,100');
+      .should.deepEqual([-1, -2, -10, -11, -100, 1, 2, 10, 11, 100]);
 
     // Weird ESLint bug
     /* eslint-disable indent*/
@@ -189,19 +186,19 @@ describe('String.naturalCompare()', function() {
       'a0001a.html',
       'a001a.html',
       'a1a.html',
-    ].sort(String.naturalCompare).toString().should.equal(
-      'a0,' +
-      'a00,' +
-      'a000,' +
-      'a00.html,' +
-      'a000.html,' +
-      'a00a.html,' +
-      'a000a.html,' +
-      'a000b.html,' +
-      'a1a.html,' +
-      'a001a.html,' +
-      'a0001a.html'
-    );
+    ].sort(String.naturalCompare).should.deepEqual([
+      'a0',
+      'a00',
+      'a000',
+      'a00.html',
+      'a000.html',
+      'a00a.html',
+      'a000a.html',
+      'a000b.html',
+      'a1a.html',
+      'a001a.html',
+      'a0001a.html',
+    ]);
     /* eslint-enable indent*/
   });
 
@@ -210,11 +207,9 @@ describe('String.naturalCompare()', function() {
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'A', 'õ', 'u', 'z', '1', '2', '9', '10']
       .sort(String.naturalCompare)
-      .join('')
-      .should.equal('12910ABŠXazuõäД');
+      .should.deepEqual(['1', '2', '9', '10', 'A', 'B', 'Š', 'X', 'a', 'z', 'u', 'õ', 'ä', 'Д']);
 
-    // Don't mess up other tests
-    String.alphabet = '';
+    String.alphabet = ''; // Don't mess up other tests
   });
 });
 
@@ -227,8 +222,7 @@ describe('String.naturalCaseCompare()', function() {
   it('should function correctly as the callback to array.sort()', function() {
     ['C', 'B', 'a', 'd']
       .sort(String.naturalCaseCompare)
-      .join('')
-      .should.equal('aBCd');
+      .should.deepEqual(['a', 'B', 'C', 'd']);
   });
 
   it('should compare strings using the provided alphabet', function() {
@@ -236,8 +230,7 @@ describe('String.naturalCaseCompare()', function() {
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
       .sort(String.naturalCaseCompare)
-      .join('')
-      .should.equal('12910aBŠzuõäÜXД');
+      .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
   });
 });
 
