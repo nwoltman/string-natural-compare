@@ -1,6 +1,6 @@
 'use strict';
 
-/* jshint mocha: true */
+/* eslint brace-style: 0 */
 
 require('../');
 var should = require('should');
@@ -175,6 +175,8 @@ describe('String.naturalCompare()', function() {
       .toString()
       .should.equal('-1,-2,-10,-11,-100,1,2,10,11,100');
 
+    // Weird ESLint bug
+    /* eslint-disable indent*/
     [
       'a000',
       'a000.html',
@@ -200,6 +202,7 @@ describe('String.naturalCompare()', function() {
       'a001a.html,' +
       'a0001a.html'
     );
+    /* eslint-enable indent*/
   });
 
   it('should compare strings using the provided alphabet', function() {

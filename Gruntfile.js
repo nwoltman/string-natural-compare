@@ -1,32 +1,18 @@
-// jscs:disable requireTrailingComma
+/* eslint comma-dangle: 0 */
+
+'use strict';
 
 module.exports = function(grunt) {
-  'use strict';
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     jsonlint: {
-      all: {
-        src: ['*.json', '.jshintrc']
-      }
+      all: ['*.json'],
     },
 
-    jshint: {
-      all: {
-        src: ['*.js', 'test/*.js'],
-        options: {
-          jshintrc: true,
-          ignores: ['*.min*']
-        }
-      }
-    },
-
-    jscs: {
-      all: ['Gruntfile.js', 'natural-compare.js', 'test/*.js'],
-      options: {
-        config: '.jscsrc'
-      }
+    eslint: {
+      all: ['*.js', 'test/*.js'],
     },
 
     mochacov: {
@@ -66,13 +52,12 @@ module.exports = function(grunt) {
 
   // Load the Grunt plugins
   grunt.loadNpmTasks('grunt-jsonlint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-cov');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Register tasks
-  grunt.registerTask('lint', ['jsonlint', 'jshint', 'jscs']);
+  grunt.registerTask('lint', ['jsonlint', 'eslint']);
   grunt.registerTask('test', ['mochacov:test'].concat(process.env.CI ? ['mochacov:testAndCoverage'] : []));
   grunt.registerTask('coverage', ['mochacov:coverage']);
   grunt.registerTask('build', ['uglify']);

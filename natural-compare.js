@@ -7,6 +7,8 @@
  * @license MIT https://github.com/woollybogger/string-natural-compare/blob/master/LICENSE.txt
  */
 
+/* eslint strict: 0 */
+
 (function() {
   'use strict';
 
