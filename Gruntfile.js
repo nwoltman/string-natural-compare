@@ -1,9 +1,8 @@
-/* eslint comma-dangle: 0 */
+/* eslint-disable comma-dangle */
 
 'use strict';
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
