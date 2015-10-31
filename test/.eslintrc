@@ -3,7 +3,8 @@
     "mocha": true
   },
   "rules": {
-    "max-nested-callbacks": 0,
-    "max-len": 0
+    "brace-style": 0,
+    "max-len": 0,
+    "max-nested-callbacks": 0
   }
 }
