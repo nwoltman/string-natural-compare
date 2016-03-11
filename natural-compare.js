@@ -1,10 +1,10 @@
 /**
  * Natural Compare
- * https://github.com/woollybogger/string-natural-compare
+ * https://github.com/nwoltman/string-natural-compare
  *
  * @version 1.1.1
  * @copyright 2015 Nathan Woltman
- * @license MIT https://github.com/woollybogger/string-natural-compare/blob/master/LICENSE.txt
+ * @license MIT https://github.com/nwoltman/string-natural-compare/blob/master/LICENSE.txt
  */
 
 /* eslint strict: 0 */
