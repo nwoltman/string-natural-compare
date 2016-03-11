@@ -1,8 +1,8 @@
 language: node_js
 node_js:
   - '0.12'
-  - 'iojs'
   - '4'
+  - '5'
 before_script: npm install -g grunt-cli
 deploy:
   provider: npm
@@ -10,4 +10,4 @@ deploy:
   on:
     tags: true
   api_key:
-    secure: meyDzXrMYL7gmnhlR6qbrLvccd0tHd86t+axhzl9yBIUviUK2UbYeZqkX6C0BSLqQzjCrzxKTTvjl2fbOH1czlQT4XGQI/1NWpfgnR/fU/IAGxzKex+7inWlrKiBjJJFr4mMbQEKERxvkl+UnC1kBwydk2wbhc1f1peimdcCWyab3jo950ymknCotlGy6+SPX92h5K15wiLloqzBccuLwe/BAnXPWdkxOdNn23Qr3hok4pG+/JU1OK24OsZg+SQtYYW8LKxuDw3OxhyUr3Azgo2XL9tUAh9qMb1riHHHbAVUSuhcjuWv0SYBzwvLLQGbVVbGwvpacYTnJl7lmZuUovzZ347Qupd+ATYLhHlLxccL4wmZ6OhEc7UlL1oLyhv23d4iZc/kZz2ZRywXGqb7BaSX/dfhLin2FcuCcQlad0eT29z730nEMWd5O3nK+5fDcx9ArVLdhEBAJyBIfjUXOqS3j0bNrsH/2NMmzZ0+eQBk/4R/ttA6gXOXWwj8CnWfsJkxLdC9Ier/oK+i5NTa/e6sjyMZMKkiAIFuKtkqNeIdhvyLANJtqBsQr5NjeWEZ6wg+eYRVYsV2Qz2hqrsww4slSCtWI8bV3M9BQh4A2aOZujSIgORs+tnsT8kIiMnlEfUgDSL8J5DIwpeKBIzQbFrf9xSjhO+WochjZRDPi7c=
+    secure: E+WUt9DEQJN9YcuVo5Z2waXaQJmAScoHNZCJnqoAObqaiZKlFWGZFMcAUHFV+xGNcoPlENBhBoADebh9e0JHAqbr3vaIbg8+c71unv4UhdBu1i+BF99SsjF8TZ9AMjpeqfDEy1jntWiqQdmr7C8jHQPmf1ISSmyXCBGaNJpytsweuy67b6OxO6i6s0tyoJkzVaVT5I3lO1rDst2pqjEQOgJOa4rf2Y6ISMnXxhMEk2KqfrNzHNJdvx4zNqStdSno7UWFFwVL6F0la3nQCdTGsUbKc2Z+fzAd+MFHkJ4S5OMt7vd5XnvjL40Uy/QS6Iaqz2ajHsG/TNHik7D4Ye8eljls8k+eu/Nvpa7dVLekw8riGoZ1j37/IXFQMg/XXHQB6Vh86pL/moglSES/t3U9VMCeNh23G4TZQLur+OjAxbyqrQQWEcXFrmT/zzfRdykV1GobbsGipwrEFiL7HA6w9qKW59VMPs0cU5OzaQt9jb/8gbGmOFEYL9heuhaBygmwmYwl/MMQllwFivBrXsbEZqSlEsfguT2iE2dsducFRxpCrQOPRo7tLrmt3mWKEmkJ+uxzAj8gaL9KpNA72SMAQMOjBMImXcoyGAR0FImVV4+JaItgoDfRziT2c91uSiJ3s1F7NEO8x+hZmI9x8QacKTK/1G3dqs0v8ZLXh35SR5k=
