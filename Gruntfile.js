@@ -11,7 +11,10 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      all: ['*.js', '!natural-compare.min.js', 'test/*.js'],
+      all: {
+        src: ['*.js', 'test/*.js'],
+        ignore: '*.min.js',
+      },
     },
 
     mochacov: {
