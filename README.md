@@ -16,10 +16,10 @@ Standard sorting:   Natural order sorting:
     img2.png            img12.png
 ```
 
-This module makes two functions available on the global `String` object:
+This module provides two functions:
 
-+ `String.naturalCompare` (case-sensitive)
-+ `String.naturalCaseCompare` (case-insensitive)
++ `naturalCompare`
++ `naturalCompare.caseInsensitive`
 
 These functions return a number indicating whether one string should come before, after, or is the same as another string.
 They can be easily used with the native [`.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) array method.
@@ -28,22 +28,13 @@ They can be easily used with the native [`.sort()`](https://developer.mozilla.or
 
 This module uses a performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding JavaScript's [`MAX_SAFE_INTEGER`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
 
-+ [jsPerf - natsort()](http://jsperf.com/natsort/2)
-+ [jsPerf - natsort() with custom alphabet](http://jsperf.com/natsort-custom-alphabet)
-
 
 ## Installation
 
-#### Node.js:
+#### npm:
 
 ```sh
 npm install string-natural-compare --save
-```
-
-Then in your JS:
-
-```js
-require('string-natural-compare');
 ```
 
 #### Bower (only up to v1.1.1):
@@ -64,20 +55,27 @@ Include the script in your HTML (drop the ".min" to use the development version)
 ## Usage
 
 ```js
+var naturalCompare = require('string-natural-compare');
+// v1: require('string-natural-compare');
+
 // Simple case-sensitive sorting
 var a = ['z1.doc', 'z10.doc', 'z17.doc', 'z2.doc', 'z23.doc', 'z3.doc'];
-a.sort(String.naturalCompare);
+a.sort(naturalCompare); // v1: a.sort(String.naturalCompare);
 // -> ['z1.doc', 'z2.doc', 'z3.doc', 'z10.doc', 'z17.doc', 'z23.doc']
 
 
 // Simple case-insensitive sorting
 var a = ['B', 'C', 'a', 'd'];
-a.sort(String.naturalCaseCompare);
+a.sort(naturalCompare.caseInsensitive); // v1: a.sort(String.naturalCaseCompare);
 // -> ['a', 'B', 'C', 'd']
+
+// Note:
+['a', 'A'].sort(naturalCompare.caseInsensitive); // -> ['a', 'A']
+['A', 'a'].sort(naturalCompare.caseInsensitive); // -> ['A', 'a']
 
 
 // Compare strings containing large numbers
-String.naturalCompare(
+naturalCompare( // v1: String.naturalCompare(
   '1165874568735487968325787328996865',
   '265812277985321589735871687040841'
 );
@@ -93,8 +91,8 @@ var a = [
 // Sort by street (case-insensitive), then by room (case-sensitive)
 a.sort(function(a, b) {
   return (
-    String.naturalCompare(a.street.toLowerCase(), b.street.toLowerCase()) ||
-    String.naturalCompare(a.room, b.room)
+    naturalCompare.caseInsensitive(a.street, b.street) ||
+    naturalCompare(a.room, b.room)
   );
 });
 
@@ -113,7 +111,7 @@ a.forEach(function(car) {
   car.sortKey = (car.make + ' ' + car.model).toLowerCase();
 });
 a.sort(function(a, b) {
-  return String.naturalCompare(a.sortKey, b.sortKey);
+  return naturalCompare(a.sortKey, b.sortKey);
 });
 ```
 
@@ -123,13 +121,14 @@ It is possible to configure a custom alphabet to achieve a desired character ord
 
 ```js
 // Estonian alphabet
-String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
-['t', 'z', 'x', 'õ'].sort(String.naturalCompare);
+naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+// v1: String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+['t', 'z', 'x', 'õ'].sort(naturalCompare);
 // -> ['z', 't', 'õ', 'x']
 
 // Russian alphabet
-String.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-['Ё', 'А', 'б', 'Б'].sort(String.naturalCompare);
+naturalCompare.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
+['Ё', 'А', 'б', 'Б'].sort(naturalCompare);
 // -> ['А', 'Б', 'Ё', 'б']
 ```
 

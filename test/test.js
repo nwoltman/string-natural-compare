@@ -1,6 +1,6 @@
 'use strict';
 
-require('../');
+var naturalCompare = require('../');
 var should = require('should');
 
 should.Assertion.add('greaterThan', function(value, message) {
@@ -22,23 +22,23 @@ function verify(testData) {
 
   switch (testData[1]) {
     case '=':
-      String.naturalCompare(a, b).should.equal(0, failMessage);
-      String.naturalCaseCompare(a, b).should.equal(0, failMessage);
+      naturalCompare(a, b).should.equal(0, failMessage);
+      naturalCompare.caseInsensitive(a, b).should.equal(0, failMessage);
       break;
     case '>':
-      String.naturalCompare(a, b).should.be.greaterThan(0, failMessage);
-      String.naturalCaseCompare(a, b).should.be.greaterThan(0, failMessage);
+      naturalCompare(a, b).should.be.greaterThan(0, failMessage);
+      naturalCompare.caseInsensitive(a, b).should.be.greaterThan(0, failMessage);
       break;
     case '<':
-      String.naturalCompare(a, b).should.be.lessThan(0, failMessage);
-      String.naturalCaseCompare(a, b).should.be.lessThan(0, failMessage);
+      naturalCompare(a, b).should.be.lessThan(0, failMessage);
+      naturalCompare.caseInsensitive(a, b).should.be.lessThan(0, failMessage);
       break;
     default:
       should.ok(false, 'Unknown expected result: ' + testData[1]);
   }
 }
 
-describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
+describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
   it('should compare strings that do not contain numbers', function() {
     [
       ['a', '=', 'a'],
@@ -151,23 +151,23 @@ describe('String.naturalCompare() and String.naturalCaseCompare()', function() {
   });
 });
 
-describe('String.naturalCompare()', function() {
+describe('naturalCompare()', function() {
   it('should perform case-sensitive comparisons', function() {
-    String.naturalCompare('a', 'A').should.be.greaterThan(0);
-    String.naturalCompare('b', 'C').should.be.greaterThan(0);
+    naturalCompare('a', 'A').should.be.greaterThan(0);
+    naturalCompare('b', 'C').should.be.greaterThan(0);
   });
 
   it('should function correctly as the callback to array.sort()', function() {
     ['a', 'c', 'b', 'd']
-      .sort(String.naturalCompare)
+      .sort(naturalCompare)
       .should.deepEqual(['a', 'b', 'c', 'd']);
 
     ['file-2.txt', 'file-1.txt', 'file-20.txt', 'file-3.txt']
-      .sort(String.naturalCompare)
+      .sort(naturalCompare)
       .should.deepEqual(['file-1.txt', 'file-2.txt', 'file-3.txt', 'file-20.txt']);
 
     [-1, 1, -2, 2, -10, 10, -11, 11, -100, 100]
-      .sort(String.naturalCompare)
+      .sort(naturalCompare)
       .should.deepEqual([-1, -2, -10, -11, -100, 1, 2, 10, 11, 100]);
 
     [
@@ -182,7 +182,7 @@ describe('String.naturalCompare()', function() {
       'a0001a.html',
       'a001a.html',
       'a1a.html',
-    ].sort(String.naturalCompare).should.deepEqual([
+    ].sort(naturalCompare).should.deepEqual([
       'a0',
       'a00',
       'a000',
@@ -198,44 +198,44 @@ describe('String.naturalCompare()', function() {
   });
 
   it('should compare strings using the provided alphabet', function() {
-    String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+    naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'A', 'õ', 'u', 'z', '1', '2', '9', '10']
-      .sort(String.naturalCompare)
+      .sort(naturalCompare)
       .should.deepEqual(['1', '2', '9', '10', 'A', 'B', 'Š', 'X', 'a', 'z', 'u', 'õ', 'ä', 'Д']);
 
-    String.alphabet = ''; // Don't mess up other tests
+    naturalCompare.alphabet = ''; // Don't mess up other tests
   });
 });
 
-describe('String.naturalCaseCompare()', function() {
+describe('naturalCompare.caseInsensitive()', function() {
   it('should perform case-insensitive comparisons', function() {
-    String.naturalCaseCompare('a', 'A').should.equal(0);
-    String.naturalCaseCompare('b', 'C').should.be.lessThan(0);
+    naturalCompare.caseInsensitive('a', 'A').should.equal(0);
+    naturalCompare.caseInsensitive('b', 'C').should.be.lessThan(0);
   });
 
   it('should function correctly as the callback to array.sort()', function() {
     ['C', 'B', 'a', 'd']
-      .sort(String.naturalCaseCompare)
+      .sort(naturalCompare.caseInsensitive)
       .should.deepEqual(['a', 'B', 'C', 'd']);
   });
 
   it('should compare strings using the provided alphabet', function() {
-    String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+    naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
-      .sort(String.naturalCaseCompare)
+      .sort(naturalCompare.caseInsensitive)
       .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
   });
 });
 
-describe('String.alphabet', function() {
+describe('naturalCompare.alphabet', function() {
   it('can be set and retrieved', function() {
-    String.alphabet = 'cba';
-    String.alphabet.should.equal('cba');
+    naturalCompare.alphabet = 'cba';
+    naturalCompare.alphabet.should.equal('cba');
   });
 
   it('can be set to null', function() {
-    String.alphabet = null;
+    naturalCompare.alphabet = null;
   });
 });
