@@ -1,0 +1,8 @@
+{
+  "description": "Dependencies for string-natural-compare bechmarking",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "benchmark": "^2.1.0",
+    "string-natural-compare": "nwoltman/string-natural-compare"
+  }
+}
