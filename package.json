@@ -3,6 +3,10 @@
   "version": "1.1.1",
   "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
   "main": "natural-compare.js",
+  "files": [
+    "natural-compare.js",
+    "LICENSE.txt"
+  ],
   "scripts": {
     "test": "grunt"
   },
@@ -17,9 +21,7 @@
     "comparison",
     "order",
     "natcmp",
-    "natcomp",
     "strnatcmp",
-    "strnatcomp",
     "sort",
     "natsort",
     "alphanum",
