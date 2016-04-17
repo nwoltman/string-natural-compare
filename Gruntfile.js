@@ -1,8 +1,10 @@
-/* eslint-disable comma-dangle */
+/* eslint-disable camelcase, global-require */
 
 'use strict';
 
 module.exports = function(grunt) {
+  require('jit-grunt')(grunt);
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -17,38 +19,42 @@ module.exports = function(grunt) {
       },
     },
 
-    mochacov: {
+    mochaTest: {
       test: {
-        options: {
-          reporter: 'spec'
-        }
-      },
-      coverage: {
-        options: {
-          reporter: 'html-cov',
-          quiet: true,
-          output: 'coverage/coverage.html'
-        }
-      },
-      testAndCoverage: {
-        options: {
-          coveralls: true
-        }
+        src: 'test/*.js',
       },
       options: {
-        files: 'test/*.js'
-      }
+        colors: true,
+      },
+    },
+
+    mocha_istanbul: {
+      coverage: {
+        src: 'test/*.js',
+        options: {
+          reportFormats: ['html'],
+        },
+      },
+      coveralls: {
+        src: 'test/*.js',
+        options: {
+          coverage: true,
+          reportFormats: ['lcovonly'],
+        },
+      },
+      options: {
+        mochaOptions: ['--colors'],
+      },
     },
   });
 
-  // Load the Grunt plugins
-  grunt.loadNpmTasks('grunt-jsonlint');
-  grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-mocha-cov');
+  grunt.event.on('coverage', function(lcov, done) {
+    require('coveralls').handleInput(lcov, done);
+  });
 
   // Register tasks
   grunt.registerTask('lint', ['jsonlint', 'eslint']);
-  grunt.registerTask('test', ['mochacov:test'].concat(process.env.CI ? ['mochacov:testAndCoverage'] : []));
-  grunt.registerTask('coverage', ['mochacov:coverage']);
+  grunt.registerTask('test', [process.env.CI ? 'mocha_istanbul:coveralls' : 'mochaTest']);
+  grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
   grunt.registerTask('default', ['lint', 'test']);
 };
