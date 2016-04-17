@@ -40,8 +40,6 @@
   },
   "devDependencies": {
     "grunt": "~1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.0",
     "grunt-eslint": "^18.0.0",
     "grunt-jsonlint": "^1.0.4",
     "grunt-mocha-cov": "~0.4.0",

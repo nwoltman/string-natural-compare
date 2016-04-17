@@ -46,7 +46,7 @@ Then in your JS:
 require('string-natural-compare');
 ```
 
-#### Bower:
+#### Bower (only up to v1.1.1):
 
 ```sh
 bower install string-natural-compare
