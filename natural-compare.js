@@ -13,8 +13,6 @@ function naturalCompare(a, b) {
   var lengthB = (b += '').length;
   var aIndex = 0;
   var bIndex = 0;
-  var alphabetIndexA;
-  var alphabetIndexB;
 
   while (aIndex < lengthA && bIndex < lengthB) {
     var charCodeA = a.charCodeAt(aIndex);
@@ -74,13 +72,12 @@ function naturalCompare(a, b) {
 
     if (charCodeA !== charCodeB) {
       if (
-        alphabetIndexMapLength &&
         charCodeA < alphabetIndexMapLength &&
         charCodeB < alphabetIndexMapLength &&
-        (alphabetIndexA = alphabetIndexMap[charCodeA]) !== -1 &&
-        (alphabetIndexB = alphabetIndexMap[charCodeB]) !== -1
+        alphabetIndexMap[charCodeA] !== -1 &&
+        alphabetIndexMap[charCodeB] !== -1
       ) {
-        return alphabetIndexA - alphabetIndexB;
+        return alphabetIndexMap[charCodeA] - alphabetIndexMap[charCodeB];
       }
 
       return charCodeA - charCodeB;
@@ -113,8 +110,9 @@ Object.defineProperties(naturalCompare, {
       }
       alphabetIndexMapLength = alphabetIndexMap.length;
       for (i = 0; i < alphabetIndexMapLength; i++) {
-        if (i in alphabetIndexMap) continue;
-        alphabetIndexMap[i] = -1;
+        if (alphabetIndexMap[i] === undefined) {
+          alphabetIndexMap[i] = -1;
+        }
       }
     },
   },
