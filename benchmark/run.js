@@ -11,30 +11,48 @@ var naturalCompareCurrent = require('../');
 new Benchmark.Suite()
 
   .add('no numbers master', function() {
-    naturalCompareMaster('file.txt', 'otherFile.txt');
-    naturalCompareMaster('otherFile.txt', 'file.txt');
+    naturalCompareMaster('fileA.txt', 'fileB.txt');
+    naturalCompareMaster('fileB.txt', 'fileA.txt');
   })
   .add('no numbers current', function() {
-    naturalCompareCurrent('file.txt', 'otherFile.txt');
-    naturalCompareCurrent('otherFile.txt', 'file.txt');
+    naturalCompareCurrent('fileA.txt', 'fileB.txt');
+    naturalCompareCurrent('fileB.txt', 'fileA.txt');
   })
 
-  .add('common numbers master', function() {
-    naturalCompareMaster('a2.txt', 'a10.txt');
-    naturalCompareMaster('a10.txt', 'a2.txt');
+  .add('common numbers different lengths master', function() {
+    naturalCompareMaster('2.txt', '10.txt');
+    naturalCompareMaster('10.txt', '2.txt');
   })
-  .add('common numbers current', function() {
-    naturalCompareCurrent('a2.txt', 'a10.txt');
-    naturalCompareCurrent('a10.txt', 'a2.txt');
+  .add('common numbers different lengths current', function() {
+    naturalCompareCurrent('2.txt', '10.txt');
+    naturalCompareCurrent('10.txt', '2.txt');
   })
 
-  .add('big numbers master', function() {
+  .add('common numbers same length master', function() {
+    naturalCompareMaster('01.txt', '05.txt');
+    naturalCompareMaster('05.txt', '01.txt');
+  })
+  .add('common numbers same length current', function() {
+    naturalCompareCurrent('01.txt', '05.txt');
+    naturalCompareCurrent('05.txt', '01.txt');
+  })
+
+  .add('big numbers different lengths master', function() {
     naturalCompareMaster('1165874568735487968325787328996865', '265812277985321589735871687040841');
     naturalCompareMaster('265812277985321589735871687040841', '1165874568735487968325787328996865');
   })
-  .add('big numbers current', function() {
+  .add('big numbers different lengths current', function() {
     naturalCompareCurrent('1165874568735487968325787328996865', '265812277985321589735871687040841');
     naturalCompareCurrent('265812277985321589735871687040841', '1165874568735487968325787328996865');
+  })
+
+  .add('big numbers same length master', function() {
+    naturalCompareMaster('1165874568735487968325787328996865', '1165874568735487989735871687040841');
+    naturalCompareMaster('1165874568735487989735871687040841', '1165874568735487968325787328996865');
+  })
+  .add('big numbers same length current', function() {
+    naturalCompareCurrent('1165874568735487968325787328996865', '1165874568735487989735871687040841');
+    naturalCompareCurrent('1165874568735487989735871687040841', '1165874568735487968325787328996865');
   })
 
   .on('cycle', function(event) {
