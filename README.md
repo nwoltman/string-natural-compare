@@ -8,6 +8,12 @@ Compare alphanumeric strings the same way a human would, using a natural order a
 [![Coverage Status](https://coveralls.io/repos/nwoltman/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/nwoltman/string-natural-compare?branch=master)
 [![devDependency Status](https://david-dm.org/nwoltman/string-natural-compare/dev-status.svg)](https://david-dm.org/nwoltman/string-natural-compare#info=devDependencies)
 
+---
+
+**Important:** The API has changed between v1 and v2. If upgrading, check out the [migration guide](#migration-guide). If using the Bower module (or v1 npm module), see the [v1 API](https://github.com/nwoltman/string-natural-compare/tree/v1.1.1#installation).
+
+---
+
 ```
 Standard sorting:   Natural order sorting:
     img1.png            img1.png
@@ -26,7 +32,7 @@ They can be easily used with the native [`.sort()`](https://developer.mozilla.or
 
 ### Fast and Robust
 
-This module uses a performant and robust algorithm to compare alphanumeric strings. It does not convert numeric substrings into JavaScript numbers, so it can compare strings containing very large numeric substrings (i.e. exceeding JavaScript's [`MAX_SAFE_INTEGER`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)). The algorithm has been optimized to be very fast, even when a [custom alphabet](#custom-alphabet) has been configured.
+This module uses a performant and robust algorithm to compare alphanumeric strings. It can compare strings containing any size of number and is heavily tested with a custom [benchmark suite](https://github.com/nwoltman/string-natural-compare/tree/master/benchmark) to make sure that it is as fast as possible, even when a [custom alphabet](#custom-alphabet) has been configured.
 
 
 ## Installation
@@ -56,17 +62,16 @@ Include the script in your HTML (drop the ".min" to use the development version)
 
 ```js
 var naturalCompare = require('string-natural-compare');
-// v1: require('string-natural-compare');
 
 // Simple case-sensitive sorting
 var a = ['z1.doc', 'z10.doc', 'z17.doc', 'z2.doc', 'z23.doc', 'z3.doc'];
-a.sort(naturalCompare); // v1: a.sort(String.naturalCompare);
+a.sort(naturalCompare);
 // -> ['z1.doc', 'z2.doc', 'z3.doc', 'z10.doc', 'z17.doc', 'z23.doc']
 
 
 // Simple case-insensitive sorting
 var a = ['B', 'C', 'a', 'd'];
-a.sort(naturalCompare.caseInsensitive); // v1: a.sort(String.naturalCaseCompare);
+a.sort(naturalCompare.caseInsensitive);
 // -> ['a', 'B', 'C', 'd']
 
 // Note:
@@ -75,7 +80,7 @@ a.sort(naturalCompare.caseInsensitive); // v1: a.sort(String.naturalCaseCompare)
 
 
 // Compare strings containing large numbers
-naturalCompare( // v1: String.naturalCompare(
+naturalCompare(
   '1165874568735487968325787328996865',
   '265812277985321589735871687040841'
 );
@@ -122,7 +127,6 @@ It is possible to configure a custom alphabet to achieve a desired character ord
 ```js
 // Estonian alphabet
 naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
-// v1: String.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 ['t', 'z', 'x', 'õ'].sort(naturalCompare);
 // -> ['z', 't', 'õ', 'x']
 
@@ -133,3 +137,20 @@ naturalCompare.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШ�
 ```
 
 **Note:** Putting numbers in the custom alphabet can cause undefined behaviour.
+
+
+## Migration Guide
+
+### Upgrading from v1 to v2
+
+The module must now be required like so:
+
+```js
+var naturalCompare = require('string-natural-compare');
+```
+
+Then the following replacements need to be made:
+
++ `String.naturalCompare` &rarr; `naturalCompare`
++ `String.naturalCaseCompare` &rarr; `naturalCompare.caseInsensitive`
++ `String.alphabet` &rarr; `naturalCompare.alphabet`
