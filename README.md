@@ -25,7 +25,7 @@ Standard sorting:   Natural order sorting:
 This module provides two functions:
 
 + `naturalCompare`
-+ `naturalCompare.caseInsensitive`
++ `naturalCompare.caseInsensitive` (alias: `naturalCompare.i`)
 
 These functions return a number indicating whether one string should come before, after, or is the same as another string.
 They can be easily used with the native [`.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) array method.
@@ -71,7 +71,7 @@ a.sort(naturalCompare);
 
 // Simple case-insensitive sorting
 var a = ['B', 'C', 'a', 'd'];
-a.sort(naturalCompare.caseInsensitive);
+a.sort(naturalCompare.caseInsensitive); // alias: a.sort(naturalCompare.i);
 // -> ['a', 'B', 'C', 'd']
 
 // Note:
@@ -84,7 +84,7 @@ naturalCompare(
   '1165874568735487968325787328996865',
   '265812277985321589735871687040841'
 );
-// -> 1
+// -> 1 (a number > 0)
 
 
 // In most cases we want to sort an array of objects
@@ -152,5 +152,5 @@ var naturalCompare = require('string-natural-compare');
 Then the following replacements need to be made:
 
 + `String.naturalCompare` &rarr; `naturalCompare`
-+ `String.naturalCaseCompare` &rarr; `naturalCompare.caseInsensitive`
++ `String.naturalCaseCompare` &rarr; `naturalCompare.caseInsensitive` (or the alias `naturalCompare.i`)
 + `String.alphabet` &rarr; `naturalCompare.alphabet`

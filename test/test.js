@@ -229,6 +229,12 @@ describe('naturalCompare.caseInsensitive()', function() {
   });
 });
 
+describe('naturalCompare.i', function() {
+  it('is an alias for naturalCompare.caseInsensitive', function() {
+    naturalCompare.i.should.equal(naturalCompare.caseInsensitive);
+  });
+});
+
 describe('naturalCompare.alphabet', function() {
   it('can be set and retrieved', function() {
     naturalCompare.alphabet = 'cba';

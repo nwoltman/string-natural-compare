@@ -80,7 +80,7 @@ function naturalCompare(a, b) {
   return lengthA - lengthB;
 }
 
-naturalCompare.caseInsensitive = function(a, b) {
+naturalCompare.caseInsensitive = naturalCompare.i = function(a, b) {
   return naturalCompare(('' + a).toLowerCase(), ('' + b).toLowerCase());
 };
 
