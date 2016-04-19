@@ -43,25 +43,15 @@ function naturalCompare(a, b) {
         ++numEndB;
       }
 
-      var numLengthA = numEndA - numStartA;
-      var numLengthB = numEndB - numStartB;
-
-      if (numLengthA < numLengthB) {
-        return -1;
-      }
-      if (numLengthA > numLengthB) {
-        return 1;
+      var difference = numEndA - numStartA - numEndB + numStartB; // numA length - numB length
+      if (difference) {
+        return difference;
       }
 
-      if (numLengthA) {
-        var numA = a.slice(numStartA, numEndA);
-        var numB = b.slice(numStartB, numEndB);
-
-        if (numA < numB) {
-          return -1;
-        }
-        if (numA > numB) {
-          return 1;
+      while (numStartA < numEndA) {
+        difference = a.charCodeAt(numStartA++) - b.charCodeAt(numStartB++);
+        if (difference) {
+          return difference;
         }
       }
 
