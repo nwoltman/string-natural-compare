@@ -2,17 +2,34 @@
   "name": "string-natural-compare",
   "version": "1.1.1",
   "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
+  "author": "Nathan Woltman <nwoltman@outlook.com>",
+  "license": "MIT",
   "main": "natural-compare.js",
   "files": [
     "natural-compare.js",
     "LICENSE.txt"
   ],
-  "scripts": {
-    "test": "grunt"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nwoltman/string-natural-compare"
+  },
+  "bugs": {
+    "url": "https://github.com/nwoltman/string-natural-compare/issues"
+  },
+  "homepage": "https://github.com/nwoltman/string-natural-compare",
+  "devDependencies": {
+    "coveralls": "^2.11.9",
+    "grunt": "~1.0.1",
+    "grunt-eslint": "^18.0.0",
+    "grunt-mocha-istanbul": "^4.0.2",
+    "grunt-mocha-test": "^0.12.7",
+    "istanbul": "^0.4.3",
+    "jit-grunt": "^0.10.0",
+    "mocha": "^2.3.2",
+    "should": "^8.0.2"
+  },
+  "scripts": {
+    "test": "grunt"
   },
   "keywords": [
     "string",
@@ -26,29 +43,5 @@
     "natsort",
     "alphanum",
     "alphanumeric"
-  ],
-  "author": "Nathan Woltman <nwoltman@outlook.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nwoltman/string-natural-compare/issues"
-  },
-  "homepage": "https://github.com/nwoltman/string-natural-compare",
-  "config": {
-    "blanket": {
-      "pattern": [
-        "string-natural-compare/natural-compare.js"
-      ]
-    }
-  },
-  "devDependencies": {
-    "coveralls": "^2.11.9",
-    "grunt": "~1.0.1",
-    "grunt-eslint": "^18.0.0",
-    "grunt-mocha-istanbul": "^4.0.2",
-    "grunt-mocha-test": "^0.12.7",
-    "istanbul": "^0.4.3",
-    "jit-grunt": "^0.10.0",
-    "mocha": "^2.3.2",
-    "should": "^8.0.2"
-  }
+  ]
 }
