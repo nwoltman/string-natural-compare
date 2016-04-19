@@ -14,8 +14,8 @@ module.exports = function(grunt) {
 
     eslint: {
       all: {
-        src: ['*.js', 'test/*.js'],
-        ignore: '*.min.js',
+        src: '**/*.js',
+        ignore: '**/node_modules/**',
       },
     },
 
