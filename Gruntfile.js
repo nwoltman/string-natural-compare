@@ -8,10 +8,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    jsonlint: {
-      all: ['*.json'],
-    },
-
     eslint: {
       all: {
         src: '**/*.js',
@@ -53,7 +49,7 @@ module.exports = function(grunt) {
   });
 
   // Register tasks
-  grunt.registerTask('lint', ['jsonlint', 'eslint']);
+  grunt.registerTask('lint', ['eslint']);
   grunt.registerTask('test', [process.env.CI ? 'mocha_istanbul:coveralls' : 'mochaTest']);
   grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
   grunt.registerTask('default', ['lint', 'test']);
