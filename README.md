@@ -111,7 +111,7 @@ var a = [
   {make: 'Porsche', model: '911 Turbo S'}
 ];
 
-// Sort by make, then by model
+// Sort by make, then by model (both case-insensitive)
 a.forEach(function(car) {
   car.sortKey = (car.make + ' ' + car.model).toLowerCase();
 });
