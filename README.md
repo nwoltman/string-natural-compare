@@ -7,12 +7,6 @@ Compare alphanumeric strings the same way a human would, using a natural order a
 [![Coverage Status](https://coveralls.io/repos/nwoltman/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/nwoltman/string-natural-compare?branch=master)
 [![devDependencies Status](https://david-dm.org/nwoltman/string-natural-compare/dev-status.svg)](https://david-dm.org/nwoltman/string-natural-compare?type=dev)
 
----
-
-**Important:** The API has changed between v1 and v2. If upgrading, check out the [migration guide](#migration-guide). If using the Bower module (or v1 npm module), see the [v1 API](https://github.com/nwoltman/string-natural-compare/tree/v1.1.1#installation).
-
----
-
 ```
 Standard sorting:   Natural order sorting:
     img1.png            img1.png
@@ -120,20 +114,3 @@ naturalCompare.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШ�
 ```
 
 **Note:** Putting numbers in the custom alphabet can cause undefined behaviour.
-
-
-## Migration Guide
-
-### Upgrading from v1 to v2
-
-The module must now be required like so:
-
-```js
-var naturalCompare = require('string-natural-compare');
-```
-
-Then the following replacements need to be made:
-
-+ `String.naturalCompare` &rarr; `naturalCompare`
-+ `String.naturalCaseCompare` &rarr; `naturalCompare.caseInsensitive` (or the alias `naturalCompare.i`)
-+ `String.alphabet` &rarr; `naturalCompare.alphabet`
