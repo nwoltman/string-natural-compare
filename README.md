@@ -5,7 +5,7 @@ Compare alphanumeric strings the same way a human would, using a natural order a
 [![NPM Version](https://img.shields.io/npm/v/string-natural-compare.svg)](https://www.npmjs.com/package/string-natural-compare)
 [![Build Status](https://travis-ci.org/nwoltman/string-natural-compare.svg?branch=master)](https://travis-ci.org/nwoltman/string-natural-compare)
 [![Coverage Status](https://coveralls.io/repos/nwoltman/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/nwoltman/string-natural-compare?branch=master)
-[![devDependency Status](https://david-dm.org/nwoltman/string-natural-compare/dev-status.svg)](https://david-dm.org/nwoltman/string-natural-compare#info=devDependencies)
+[![devDependencies Status](https://david-dm.org/nwoltman/string-natural-compare/dev-status.svg)](https://david-dm.org/nwoltman/string-natural-compare?type=dev)
 
 ---
 
@@ -36,25 +36,9 @@ This module uses a performant and robust algorithm to compare alphanumeric strin
 
 ## Installation
 
-#### npm:
-
 ```sh
 npm install string-natural-compare --save
 ```
-
-#### Bower (only up to v1.1.1):
-
-```sh
-bower install string-natural-compare#1.1.1
-```
-
-Include the script in your HTML (drop the ".min" to use the development version):
-
-```html
-<script src="/bower_components/string-natural-compare/natural-compare.min.js"></script>
-```
-
-**Note:** IE8 and lower not supported.
 
 
 ## Usage
