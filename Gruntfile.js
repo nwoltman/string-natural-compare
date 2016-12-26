@@ -6,12 +6,10 @@ module.exports = function(grunt) {
   require('jit-grunt')(grunt);
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-
     eslint: {
       all: {
         src: '**/*.js',
-        ignore: '**/node_modules/**',
+        ignore: 'node_modules/**',
       },
     },
 
