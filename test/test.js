@@ -3,18 +3,6 @@
 var naturalCompare = require('../');
 var should = require('should');
 
-should.Assertion.add('greaterThan', function(value, message) {
-  this.params = {operator: 'to be greater than ' + value};
-
-  should.ok(this.obj > value, message);
-});
-
-should.Assertion.add('lessThan', function(value, message) {
-  this.params = {operator: 'to be less than ' + value};
-
-  should.ok(this.obj < value, message);
-});
-
 function verify(testData) {
   var a = testData[0];
   var b = testData[2];
