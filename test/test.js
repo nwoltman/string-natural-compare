@@ -114,6 +114,16 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
+  it('should not consider an integer preceeded by a minus sign as a negative number', function() {
+    [
+      ['-1', '<', '-2'],
+      ['-2', '<', '-10'],
+      ['-11', '>', '-10'],
+      ['-11', '<', '-100'],
+      ['a-11', '<', 'a-100'],
+    ].forEach(verify);
+  });
+
   it('should compare non-string inputs as strings', function() {
     [
       [1, '<', 2],
@@ -165,10 +175,6 @@ describe('naturalCompare()', function() {
     ['file-2.txt', 'file-1.txt', 'file-20.txt', 'file-3.txt']
       .sort(naturalCompare)
       .should.deepEqual(['file-1.txt', 'file-2.txt', 'file-3.txt', 'file-20.txt']);
-
-    [-1, 1, -2, 2, -10, 10, -11, 11, -100, 100]
-      .sort(naturalCompare)
-      .should.deepEqual([-1, -2, -10, -11, -100, 1, 2, 10, 11, 100]);
 
     [
       'a000',
