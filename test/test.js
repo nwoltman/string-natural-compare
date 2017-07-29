@@ -39,6 +39,7 @@ function verify(testData) {
 }
 
 describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
+
   it('should compare strings that do not contain numbers', function() {
     [
       ['a', '=', 'a'],
@@ -159,9 +160,12 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
       ],
     ].forEach(verify);
   });
+
 });
 
+
 describe('naturalCompare()', function() {
+
   it('should perform case-sensitive comparisons', function() {
     naturalCompare('a', 'A').should.be.greaterThan(0);
     naturalCompare('b', 'C').should.be.greaterThan(0);
@@ -212,9 +216,12 @@ describe('naturalCompare()', function() {
 
     naturalCompare.alphabet = ''; // Don't mess up other tests
   });
+
 });
 
+
 describe('naturalCompare.caseInsensitive()', function() {
+
   it('should perform case-insensitive comparisons', function() {
     naturalCompare.caseInsensitive('a', 'A').should.equal(0);
     naturalCompare.caseInsensitive('b', 'C').should.be.lessThan(0);
@@ -233,15 +240,21 @@ describe('naturalCompare.caseInsensitive()', function() {
       .sort(naturalCompare.caseInsensitive)
       .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
   });
+
 });
 
+
 describe('naturalCompare.i', function() {
+
   it('is an alias for naturalCompare.caseInsensitive', function() {
     naturalCompare.i.should.equal(naturalCompare.caseInsensitive);
   });
+
 });
 
+
 describe('naturalCompare.alphabet', function() {
+
   it('can be set and retrieved', function() {
     naturalCompare.alphabet = 'cba';
     naturalCompare.alphabet.should.equal('cba');
@@ -250,4 +263,5 @@ describe('naturalCompare.alphabet', function() {
   it('can be set to null', function() {
     naturalCompare.alphabet = null;
   });
+
 });
