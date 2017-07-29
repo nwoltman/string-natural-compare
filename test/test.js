@@ -1,7 +1,8 @@
 'use strict';
 
+require('should');
+
 var naturalCompare = require('../');
-var should = require('should');
 
 function verify(testData) {
   var a = testData[0];
@@ -22,7 +23,7 @@ function verify(testData) {
       naturalCompare.caseInsensitive(a, b).should.be.lessThan(0, failMessage);
       break;
     default:
-      should.ok(false, 'Unknown expected result: ' + testData[1]);
+      throw new Error('Unknown comparison operator: ' + testData[1]);
   }
 }
 
