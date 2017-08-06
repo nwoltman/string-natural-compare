@@ -89,16 +89,21 @@ Object.defineProperties(naturalCompare, {
     get: function() {
       return alphabet;
     },
+
     set: function(value) {
       alphabet = value;
       alphabetIndexMap = [];
+
       var i = 0;
+
       if (alphabet) {
         for (; i < alphabet.length; i++) {
           alphabetIndexMap[alphabet.charCodeAt(i)] = i;
         }
       }
+
       alphabetIndexMapLength = alphabetIndexMap.length;
+
       for (i = 0; i < alphabetIndexMapLength; i++) {
         if (alphabetIndexMap[i] === undefined) {
           alphabetIndexMap[i] = -1;
