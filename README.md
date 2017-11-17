@@ -31,7 +31,11 @@ This module uses a performant and robust algorithm to compare alphanumeric strin
 ## Installation
 
 ```sh
+# npm
 npm install string-natural-compare --save
+
+# yarn
+yarn add string-natural-compare
 ```
 
 
