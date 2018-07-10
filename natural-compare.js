@@ -113,4 +113,11 @@ Object.defineProperties(naturalCompare, {
   },
 });
 
-module.exports = naturalCompare;
+// trick taken from https://gist.github.com/drmikecrowe/4bf0938ea73bf704790f
+(function(window) {
+  if (typeof module === 'object' && module && typeof module.exports === 'object') {
+    module.exports = naturalCompare;
+  } else {
+    window.naturalCompare = naturalCompare;
+  }
+})(this);
