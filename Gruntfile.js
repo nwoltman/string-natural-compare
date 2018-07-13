@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     eslint: {
       all: {
         src: '**/*.js',
-        ignore: 'node_modules/**',
+        ignore: '@(node_modules|coverage)/**',
       },
     },
 
