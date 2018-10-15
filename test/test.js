@@ -181,10 +181,12 @@ describe('naturalCompare()', function() {
       'a0001a.html',
       'a001a.html',
       'a1a.html',
+      'a000000000',
     ].sort(naturalCompare).should.deepEqual([
       'a0',
       'a00',
       'a000',
+      'a000000000',
       'a00.html',
       'a000.html',
       'a00a.html',
