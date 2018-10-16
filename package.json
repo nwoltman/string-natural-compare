@@ -1,6 +1,6 @@
 {
   "name": "string-natural-compare",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Compare alphanumeric strings the same way a human would, using a natural order algorithm",
   "author": "Nathan Woltman <nwoltman@outlook.com>",
   "license": "MIT",
