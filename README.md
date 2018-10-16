@@ -66,7 +66,7 @@ naturalCompare(
   '265812277985321589735871687040841'
 );
 // -> 1
-// Other inputs with the same ordering as this may yield a different number > 0
+// (Other inputs with the same ordering as this example may yield a different number > 0)
 
 
 // In most cases we want to sort an array of objects
