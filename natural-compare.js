@@ -77,11 +77,11 @@ function naturalCompare(a, b) {
     ++bIndex;
   }
 
-  if (aIndex >= lengthA && bIndex < lengthB && a.length >= b.length) {
+  if (aIndex >= lengthA && bIndex < lengthB && lengthA >= lengthB) {
     return -1;
   }
 
-  if (bIndex >= lengthB && aIndex < lengthA && b.length >= a.length) {
+  if (bIndex >= lengthB && aIndex < lengthA && lengthB >= lengthA) {
     return 1;
   }
 
