@@ -25,7 +25,7 @@ They can be easily used with the native [`.sort()`](https://developer.mozilla.or
 
 ### Fast and Robust
 
-This module uses a performant and robust algorithm to compare alphanumeric strings. It can compare strings containing any size of number and is heavily tested with a custom [benchmark suite](https://github.com/nwoltman/string-natural-compare/tree/master/benchmark) to make sure that it is as fast as possible, even when a [custom alphabet](#custom-alphabet) has been configured.
+This module can compare strings containing any size of number and is heavily tested with a custom [benchmark suite](https://github.com/nwoltman/string-natural-compare/tree/master/benchmark) to make sure that it is as fast as possible.
 
 
 ## Installation
