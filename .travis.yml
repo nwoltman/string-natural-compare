@@ -1,12 +1,21 @@
 language: node_js
 node_js:
-  - '6'
-  - '8'
+  - '13'
+  - '12'
   - '10'
-deploy:
-  provider: npm
-  email: nwoltman@outlook.com
-  on:
-    tags: true
-  api_key:
-    secure: E54/9bONJASXDh2trP6IhcdBweQFzPP2/dO4InQcSCsz7CNpIOIZtx2rmg0m3GAwMvhbUASdAsYI8zZTPv0A2s1YfW1Vpdt2+pnV9DVPc7dTYymF7MAx/vULlzUUOEQjqodArfGcmaefj8D9JnnoPUepU1BJXjG9NJGe8w+WTG+zaqCcFmTICCnNgPHs/3l+Qb2ROPWqbAqu5kVALjyvhBPfRaDe+lUP1CbISFDoXSUD7tJcLrqOfKyUUDYxNfLWvpRlU9QLew/ZmL5r+J9vr7NSg7epfE6WBYB70EgIv717wgPVxBiux+TAgltGrR/XCqVDRoHLviBMn3krM36SFYfiB7mofwukdJ6PP2z9Y6GhbGLUuyhfOFfwgYzxcsH+Lhjkyhmt10ntsHbdJyMvvs3wzcgWnYoNAfp3d69R/l43il/H9kHOsuBMujFs9hxLtvXc380E8XCRMQ5qVyYngZGudNgQWn1u5L+AnJfcgBpuHIfmCWbbyx2VMjEBFCgLJ7A1vHxCMgwGFvOvprnV/GiluA5KuhZKpCgDRZH7iA+/2JfHmJOesCCjgQgwOP7mmT3in/EVKj6y7JEwD1VdRsh9LGL9Yq5B8cy2YD0pCFU1CIyidkw1hK7DXtO5+LIvzs1IyGybChMjyNx19Uv77i9zeW4OduocynT4Udx4LU8=
+stages:
+  - test
+  - name: npm release
+    if: tag IS present
+jobs:
+  include:
+    - stage: npm release
+      install: skip
+      script: true # skip step with success exit code
+      deploy:
+        provider: npm
+        email: nwoltman@outlook.com
+        on:
+          tags: true
+        api_key:
+          secure: E54/9bONJASXDh2trP6IhcdBweQFzPP2/dO4InQcSCsz7CNpIOIZtx2rmg0m3GAwMvhbUASdAsYI8zZTPv0A2s1YfW1Vpdt2+pnV9DVPc7dTYymF7MAx/vULlzUUOEQjqodArfGcmaefj8D9JnnoPUepU1BJXjG9NJGe8w+WTG+zaqCcFmTICCnNgPHs/3l+Qb2ROPWqbAqu5kVALjyvhBPfRaDe+lUP1CbISFDoXSUD7tJcLrqOfKyUUDYxNfLWvpRlU9QLew/ZmL5r+J9vr7NSg7epfE6WBYB70EgIv717wgPVxBiux+TAgltGrR/XCqVDRoHLviBMn3krM36SFYfiB7mofwukdJ6PP2z9Y6GhbGLUuyhfOFfwgYzxcsH+Lhjkyhmt10ntsHbdJyMvvs3wzcgWnYoNAfp3d69R/l43il/H9kHOsuBMujFs9hxLtvXc380E8XCRMQ5qVyYngZGudNgQWn1u5L+AnJfcgBpuHIfmCWbbyx2VMjEBFCgLJ7A1vHxCMgwGFvOvprnV/GiluA5KuhZKpCgDRZH7iA+/2JfHmJOesCCjgQgwOP7mmT3in/EVKj6y7JEwD1VdRsh9LGL9Yq5B8cy2YD0pCFU1CIyidkw1hK7DXtO5+LIvzs1IyGybChMjyNx19Uv77i9zeW4OduocynT4Udx4LU8=
