@@ -79,6 +79,10 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
       ['a00', '<', 'a000'],
       ['a 0 a', '<', 'a 0 b'],
       ['a 0 a', '<', 'a 00 b'],
+      ['a00', '<', 'a0a'],
+      ['a0000', '<', 'a0a'],
+      ['a0a', '>', 'a00'],
+      ['a0a', '>', 'a000'],
       ['a0a', '<', 'a0b'],
       ['a0a', '<', 'a00b'],
     ].forEach(verify);

@@ -27,6 +27,13 @@
   "eslintIgnore": [
     "coverage/"
   ],
+  "nyc": {
+    "reporter": ["html", "text-summary"],
+    "check-coverage": true,
+    "branches": 100,
+    "lines": 100,
+    "statements": 100
+  },
   "devDependencies": {
     "@nwoltman/eslint-config": "^0.4.0",
     "coveralls": "^3.0.7",
@@ -37,7 +44,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "eslint . && nyc --reporter=html --reporter=text-summary mocha",
+    "test": "eslint . && nyc mocha",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   }
 }
