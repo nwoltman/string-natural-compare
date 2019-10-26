@@ -2,12 +2,12 @@
 
 require('should');
 
-var naturalCompare = require('../');
+const naturalCompare = require('../');
 
 function verify(testData) {
-  var a = testData[0];
-  var b = testData[2];
-  var failMessage = 'failure on input: [' + testData.join(' ') + ']';
+  const a = testData[0];
+  const b = testData[2];
+  const failMessage = 'failure on input: [' + testData.join(' ') + ']';
 
   switch (testData[1]) {
     case '=':
@@ -27,9 +27,9 @@ function verify(testData) {
   }
 }
 
-describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
+describe('naturalCompare() and naturalCompare.caseInsensitive()', () => {
 
-  it('should compare strings that do not contain numbers', function() {
+  it('should compare strings that do not contain numbers', () => {
     [
       ['a', '=', 'a'],
       ['a', '<', 'b'],
@@ -45,7 +45,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should compare integer substrings by their numeric value', function() {
+  it('should compare integer substrings by their numeric value', () => {
     [
       ['1', '=', '1'],
       ['50', '=', '50'],
@@ -74,7 +74,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should work with 0 in the string', function() {
+  it('should work with 0 in the string', () => {
     [
       ['a00', '<', 'a000'],
       ['a 0 a', '<', 'a 0 b'],
@@ -88,7 +88,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should compare integer substrings with leading 0s by their numeric value', function() {
+  it('should compare integer substrings with leading 0s by their numeric value', () => {
     [
       ['000', '=', '000'],
       ['001', '=', '001'],
@@ -99,7 +99,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should not consider a decimal point surrounded by integers as a floating point number', function() {
+  it('should not consider a decimal point surrounded by integers as a floating point number', () => {
     [
       ['0.01', '<', '0.001'],
       ['0.001', '>', '0.01'],
@@ -108,7 +108,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should not consider an integer preceeded by a minus sign as a negative number', function() {
+  it('should not consider an integer preceeded by a minus sign as a negative number', () => {
     [
       ['-1', '<', '-2'],
       ['-2', '<', '-10'],
@@ -118,7 +118,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
     ].forEach(verify);
   });
 
-  it('should compare non-string inputs as strings', function() {
+  it('should compare non-string inputs as strings', () => {
     [
       [1, '<', 2],
       [2, '>', 1],
@@ -127,14 +127,14 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
       [null, '<', undefined],
       [{}, '=', {}],
       [
-        {toString: function() { return 'a'; }},
+        {toString: () => 'a'},
         '<',
-        {toString: function() { return 'b'; }},
+        {toString: () => 'b'},
       ],
     ].forEach(verify);
   });
 
-  it('should correctly compare strings containing very large numbers', function() {
+  it('should correctly compare strings containing very large numbers', () => {
     [
       [
         '1165874568735487968325787328996864',
@@ -157,14 +157,14 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', function() {
 });
 
 
-describe('naturalCompare()', function() {
+describe('naturalCompare()', () => {
 
-  it('should perform case-sensitive comparisons', function() {
+  it('should perform case-sensitive comparisons', () => {
     naturalCompare('a', 'A').should.be.greaterThan(0);
     naturalCompare('b', 'C').should.be.greaterThan(0);
   });
 
-  it('should function correctly as the callback to array.sort()', function() {
+  it('should function correctly as the callback to array.sort()', () => {
     ['a', 'c', 'b', 'd']
       .sort(naturalCompare)
       .should.deepEqual(['a', 'b', 'c', 'd']);
@@ -202,7 +202,7 @@ describe('naturalCompare()', function() {
     ]);
   });
 
-  it('should compare strings using the provided alphabet', function() {
+  it('should compare strings using the provided alphabet', () => {
     naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'A', 'õ', 'u', 'z', '1', '2', '9', '10']
@@ -215,20 +215,20 @@ describe('naturalCompare()', function() {
 });
 
 
-describe('naturalCompare.caseInsensitive()', function() {
+describe('naturalCompare.caseInsensitive()', () => {
 
-  it('should perform case-insensitive comparisons', function() {
+  it('should perform case-insensitive comparisons', () => {
     naturalCompare.caseInsensitive('a', 'A').should.equal(0);
     naturalCompare.caseInsensitive('b', 'C').should.be.lessThan(0);
   });
 
-  it('should function correctly as the callback to array.sort()', function() {
+  it('should function correctly as the callback to array.sort()', () => {
     ['C', 'B', 'a', 'd']
       .sort(naturalCompare.caseInsensitive)
       .should.deepEqual(['a', 'B', 'C', 'd']);
   });
 
-  it('should compare strings using the provided alphabet', function() {
+  it('should compare strings using the provided alphabet', () => {
     naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
@@ -239,23 +239,23 @@ describe('naturalCompare.caseInsensitive()', function() {
 });
 
 
-describe('naturalCompare.i', function() {
+describe('naturalCompare.i', () => {
 
-  it('is an alias for naturalCompare.caseInsensitive', function() {
+  it('is an alias for naturalCompare.caseInsensitive', () => {
     naturalCompare.i.should.equal(naturalCompare.caseInsensitive);
   });
 
 });
 
 
-describe('naturalCompare.alphabet', function() {
+describe('naturalCompare.alphabet', () => {
 
-  it('can be set and retrieved', function() {
+  it('can be set and retrieved', () => {
     naturalCompare.alphabet = 'cba';
     naturalCompare.alphabet.should.equal('cba');
   });
 
-  it('can be set to null', function() {
+  it('can be set to null', () => {
     naturalCompare.alphabet = null;
   });
 

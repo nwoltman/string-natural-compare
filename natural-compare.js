@@ -94,11 +94,11 @@ naturalCompare.caseInsensitive = naturalCompare.i = function(a, b) {
 
 Object.defineProperties(naturalCompare, {
   alphabet: {
-    get: function() {
+    get() {
       return alphabet;
     },
 
-    set: function(value) {
+    set(value) {
       alphabet = value;
       alphabetIndexMap = [];
 
