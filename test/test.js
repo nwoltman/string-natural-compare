@@ -245,10 +245,12 @@ describe('naturalCompare()', () => {
   });
 
   it('should compare strings using the provided alphabet', () => {
-    naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+    const opts = {
+      alphabet: 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy',
+    };
 
     ['Д', 'a', 'ä', 'B', 'Š', 'X', 'A', 'õ', 'u', 'z', '1', '2', '9', '10']
-      .sort(naturalCompare)
+      .sort((a, b) => naturalCompare(a, b, opts))
       .should.deepEqual(['1', '2', '9', '10', 'A', 'B', 'Š', 'X', 'a', 'z', 'u', 'õ', 'ä', 'Д']);
 
     naturalCompare.alphabet = null; // Reset alphabet for other tests
@@ -267,27 +269,16 @@ describe('naturalCompare()', () => {
     });
 
     it('should compare strings using the provided alphabet', () => {
-      naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+      const opts = {
+        alphabet: 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy',
+        caseInsensitive: true,
+      };
 
       ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
-        .sort((a, b) => naturalCompare(a, b, {caseInsensitive: true}))
+        .sort((a, b) => naturalCompare(a, b, opts))
         .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
     });
 
-  });
-
-});
-
-
-describe('naturalCompare.alphabet', () => {
-
-  it('can be set and retrieved', () => {
-    naturalCompare.alphabet = 'cba';
-    naturalCompare.alphabet.should.equal('cba');
-  });
-
-  it('can be set to null', () => {
-    naturalCompare.alphabet = null;
   });
 
 });

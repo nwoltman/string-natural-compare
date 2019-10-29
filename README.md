@@ -40,6 +40,7 @@ yarn add string-natural-compare
 + `strB` (_string_)
 + `options` (_object_) - Optional options object with the following options:
   + `caseInsensitive` (_boolean_) - Set to `true` to compare strings case-insensitively. Default: `false`.
+  + `alphabet` (_string_) - A string of characters that define a custom character ordering. Default: `undefined`.
 
 ```js
 const naturalCompare = require('string-natural-compare');
@@ -83,9 +84,9 @@ hotelRooms.sort((a, b) => (
 
 
 // When text transformation is needed or when doing a case-insensitive sort on a
-// large array, it is best for performance to pre-compute the transformed text
-// and store it in that object. This way, the text transformation will not be
-// needed for every comparison while sorting.
+// large array of objects, it is best for performance to pre-compute the
+// transformed text and store it on the object. This way, the text will not need
+// to be transformed for every comparison while sorting.
 const cars = [
   {make: 'Audi', model: 'R8'},
   {make: 'Porsche', model: '911 Turbo S'}
@@ -95,23 +96,13 @@ for (const car of cars) {
   car.sortKey = (car.make + ' ' + car.model).toLowerCase();
 }
 cars.sort((a, b) => naturalCompare(a.sortKey, b.sortKey));
-```
 
-### Custom Alphabet
 
-It is possible to configure a custom alphabet to achieve a desired character ordering.
-
-```js
-const naturalCompare = require('string-natural-compare');
-
-// Estonian alphabet
-naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
-['t', 'z', 'x', 'õ'].sort(naturalCompare);
-// -> ['z', 't', 'õ', 'x']
-
-// Russian alphabet
-naturalCompare.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-['Ё', 'А', 'б', 'Б'].sort(naturalCompare);
+// Using a custom alphabet (Russian alphabet)
+const russianOpts = {
+  alphabet: 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя',
+};
+['Ё', 'А', 'б', 'Б'].sort((a, b) => naturalCompare(a, b, russianOpts));
 // -> ['А', 'Б', 'Ё', 'б']
 ```
 

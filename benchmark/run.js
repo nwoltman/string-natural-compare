@@ -104,32 +104,32 @@ if (suite.length) {
     .run();
 }
 
-naturalCompareMaster.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
-naturalCompareLocal.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
-
 const alphabetSuite = new Benchmark.Suite();
+const opts = {
+  alphabet: 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy',
+};
 
 if (config.has('6')) {
   alphabetSuite
     .add('6) custom alphabet included characters master', () => {
-      naturalCompareMaster('š.txt', 'z.txt');
-      naturalCompareMaster('z.txt', 'š.txt');
+      naturalCompareMaster('š.txt', 'z.txt', opts);
+      naturalCompareMaster('z.txt', 'š.txt', opts);
     })
     .add('6) custom alphabet included characters local', () => {
-      naturalCompareLocal('š.txt', 'z.txt');
-      naturalCompareLocal('z.txt', 'š.txt');
+      naturalCompareLocal('š.txt', 'z.txt', opts);
+      naturalCompareLocal('z.txt', 'š.txt', opts);
     });
 }
 
 if (config.has('7')) {
   alphabetSuite
     .add('7) custom alphabet missing characters master', () => {
-      naturalCompareMaster('é.txt', 'à.txt');
-      naturalCompareMaster('à.txt', 'é.txt');
+      naturalCompareMaster('é.txt', 'à.txt', opts);
+      naturalCompareMaster('à.txt', 'é.txt', opts);
     })
     .add('7) custom alphabet missing characters local', () => {
-      naturalCompareLocal('é.txt', 'à.txt');
-      naturalCompareLocal('à.txt', 'é.txt');
+      naturalCompareLocal('é.txt', 'à.txt', opts);
+      naturalCompareLocal('à.txt', 'é.txt', opts);
     });
 }
 

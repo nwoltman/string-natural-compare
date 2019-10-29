@@ -1,7 +1,6 @@
 'use strict';
 
-var alphabet;
-var alphabetIndexMap = [];
+const defaultAlphabetIndexMap = [];
 
 function isNumberCode(code) {
   return code >= 48 && code <= 57;
@@ -15,15 +14,22 @@ function naturalCompare(a, b, opts) {
     throw new TypeError(`The second argument must be a string. Received type '${typeof b}'`);
   }
 
-  if (opts && opts.caseInsensitive) {
-    a = a.toLowerCase();
-    b = b.toLowerCase();
-  }
-
+  var alphabetIndexMap = defaultAlphabetIndexMap;
   var lengthA = a.length;
   var lengthB = b.length;
   var aIndex = 0;
   var bIndex = 0;
+
+  if (opts) {
+    if (opts.caseInsensitive) {
+      a = a.toLowerCase();
+      b = b.toLowerCase();
+    }
+
+    if (opts.alphabet) {
+      alphabetIndexMap = buildAlphabetIndexMap(opts.alphabet);
+    }
+  }
 
   while (aIndex < lengthA && bIndex < lengthB) {
     var charCodeA = a.charCodeAt(aIndex);
@@ -99,33 +105,30 @@ function naturalCompare(a, b, opts) {
   return lengthA - lengthB;
 }
 
-Object.defineProperties(naturalCompare, {
-  alphabet: {
-    get() {
-      return alphabet;
-    },
+const alphabetIndexMapCache = {};
 
-    set(value) {
-      alphabet = value;
-      alphabetIndexMap = [];
+function buildAlphabetIndexMap(alphabet) {
+  const existingMap = alphabetIndexMapCache[alphabet];
+  if (existingMap !== undefined) {
+    return existingMap;
+  }
 
-      if (!alphabet) {
-        return;
-      }
+  const indexMap = [];
+  const maxCharCode = alphabet.split('').reduce((maxCode, char) => {
+    return Math.max(maxCode, char.charCodeAt(0));
+  }, 0);
 
-      const maxCharCode = alphabet.split('').reduce((maxCode, char) => {
-        return Math.max(maxCode, char.charCodeAt(0));
-      }, 0);
+  for (let i = 0; i <= maxCharCode; i++) {
+    indexMap.push(-1);
+  }
 
-      for (let i = 0; i <= maxCharCode; i++) {
-        alphabetIndexMap.push(-1);
-      }
+  for (let i = 0; i < alphabet.length; i++) {
+    indexMap[alphabet.charCodeAt(i)] = i;
+  }
 
-      for (let i = 0; i < alphabet.length; i++) {
-        alphabetIndexMap[alphabet.charCodeAt(i)] = i;
-      }
-    },
-  },
-});
+  alphabetIndexMapCache[alphabet] = indexMap;
+
+  return indexMap;
+}
 
 module.exports = naturalCompare;
