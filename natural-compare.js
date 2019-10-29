@@ -1,8 +1,7 @@
 'use strict';
 
 var alphabet;
-var alphabetIndexMap;
-var alphabetIndexMapLength = 0;
+var alphabetIndexMap = [];
 
 function isNumberCode(code) {
   return code >= 48 && code <= 57;
@@ -74,8 +73,8 @@ function naturalCompare(a, b, opts) {
 
     if (charCodeA !== charCodeB) {
       if (
-        charCodeA < alphabetIndexMapLength &&
-        charCodeB < alphabetIndexMapLength &&
+        charCodeA < alphabetIndexMap.length &&
+        charCodeB < alphabetIndexMap.length &&
         alphabetIndexMap[charCodeA] !== -1 &&
         alphabetIndexMap[charCodeB] !== -1
       ) {
@@ -110,20 +109,20 @@ Object.defineProperties(naturalCompare, {
       alphabet = value;
       alphabetIndexMap = [];
 
-      var i = 0;
-
-      if (alphabet) {
-        for (; i < alphabet.length; i++) {
-          alphabetIndexMap[alphabet.charCodeAt(i)] = i;
-        }
+      if (!alphabet) {
+        return;
       }
 
-      alphabetIndexMapLength = alphabetIndexMap.length;
+      const maxCharCode = alphabet.split('').reduce((maxCode, char) => {
+        return Math.max(maxCode, char.charCodeAt(0));
+      }, 0);
 
-      for (i = 0; i < alphabetIndexMapLength; i++) {
-        if (alphabetIndexMap[i] === undefined) {
-          alphabetIndexMap[i] = -1;
-        }
+      for (let i = 0; i <= maxCharCode; i++) {
+        alphabetIndexMap.push(-1);
+      }
+
+      for (let i = 0; i < alphabet.length; i++) {
+        alphabetIndexMap[alphabet.charCodeAt(i)] = i;
       }
     },
   },
