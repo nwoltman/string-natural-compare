@@ -8,9 +8,21 @@ function isNumberCode(code) {
   return code >= 48 && code <= 57;
 }
 
-function naturalCompare(a, b) {
-  var lengthA = (a += '').length;
-  var lengthB = (b += '').length;
+function naturalCompare(a, b, opts) {
+  if (typeof a !== 'string') {
+    throw new TypeError(`The first argument must be a string. Received type '${typeof a}'`);
+  }
+  if (typeof b !== 'string') {
+    throw new TypeError(`The second argument must be a string. Received type '${typeof b}'`);
+  }
+
+  if (opts && opts.caseInsensitive) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+  }
+
+  var lengthA = a.length;
+  var lengthB = b.length;
   var aIndex = 0;
   var bIndex = 0;
 
@@ -87,10 +99,6 @@ function naturalCompare(a, b) {
 
   return lengthA - lengthB;
 }
-
-naturalCompare.caseInsensitive = naturalCompare.i = function(a, b) {
-  return naturalCompare(('' + a).toLowerCase(), ('' + b).toLowerCase());
-};
 
 Object.defineProperties(naturalCompare, {
   alphabet: {

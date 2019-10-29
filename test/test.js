@@ -2,32 +2,95 @@
 
 require('should');
 
+const assert = require('assert').strict;
 const naturalCompare = require('../');
 
 function verify(testData) {
   const a = testData[0];
   const b = testData[2];
-  const failMessage = 'failure on input: [' + testData.join(' ') + ']';
+  const failMessage = `failure on input: [${testData.join(' ')}]`;
 
   switch (testData[1]) {
     case '=':
       naturalCompare(a, b).should.equal(0, failMessage);
-      naturalCompare.caseInsensitive(a, b).should.equal(0, failMessage);
+      naturalCompare(a, b, {caseInsensitive: true}).should.equal(0, failMessage);
       break;
     case '>':
       naturalCompare(a, b).should.be.greaterThan(0, failMessage);
-      naturalCompare.caseInsensitive(a, b).should.be.greaterThan(0, failMessage);
+      naturalCompare(a, b, {caseInsensitive: true}).should.be.greaterThan(0, failMessage);
       break;
     case '<':
       naturalCompare(a, b).should.be.lessThan(0, failMessage);
-      naturalCompare.caseInsensitive(a, b).should.be.lessThan(0, failMessage);
+      naturalCompare(a, b, {caseInsensitive: true}).should.be.lessThan(0, failMessage);
       break;
     default:
       throw new Error('Unknown comparison operator: ' + testData[1]);
   }
 }
 
-describe('naturalCompare() and naturalCompare.caseInsensitive()', () => {
+describe('naturalCompare()', () => {
+
+  it('should throw if the first argument is not a string', () => {
+    assert.throws(
+      () => naturalCompare(undefined),
+      new TypeError("The first argument must be a string. Received type 'undefined'")
+    );
+    assert.throws(
+      () => naturalCompare(null),
+      new TypeError("The first argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare(1),
+      new TypeError("The first argument must be a string. Received type 'number'")
+    );
+    assert.throws(
+      () => naturalCompare(false),
+      new TypeError("The first argument must be a string. Received type 'boolean'")
+    );
+    assert.throws(
+      () => naturalCompare({}),
+      new TypeError("The first argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare([]),
+      new TypeError("The first argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare(Symbol('sym')),
+      new TypeError("The first argument must be a string. Received type 'symbol'")
+    );
+  });
+
+  it('should throw if the second argument is not a string', () => {
+    assert.throws(
+      () => naturalCompare('', undefined),
+      new TypeError("The second argument must be a string. Received type 'undefined'")
+    );
+    assert.throws(
+      () => naturalCompare('', null),
+      new TypeError("The second argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare('', 0),
+      new TypeError("The second argument must be a string. Received type 'number'")
+    );
+    assert.throws(
+      () => naturalCompare('', true),
+      new TypeError("The second argument must be a string. Received type 'boolean'")
+    );
+    assert.throws(
+      () => naturalCompare('', {}),
+      new TypeError("The second argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare('', []),
+      new TypeError("The second argument must be a string. Received type 'object'")
+    );
+    assert.throws(
+      () => naturalCompare('', Symbol('sym')),
+      new TypeError("The second argument must be a string. Received type 'symbol'")
+    );
+  });
 
   it('should compare strings that do not contain numbers', () => {
     [
@@ -118,22 +181,6 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', () => {
     ].forEach(verify);
   });
 
-  it('should compare non-string inputs as strings', () => {
-    [
-      [1, '<', 2],
-      [2, '>', 1],
-      [20, '>', 3],
-      [true, '>', false],
-      [null, '<', undefined],
-      [{}, '=', {}],
-      [
-        {toString: () => 'a'},
-        '<',
-        {toString: () => 'b'},
-      ],
-    ].forEach(verify);
-  });
-
   it('should correctly compare strings containing very large numbers', () => {
     [
       [
@@ -154,12 +201,7 @@ describe('naturalCompare() and naturalCompare.caseInsensitive()', () => {
     ].forEach(verify);
   });
 
-});
-
-
-describe('naturalCompare()', () => {
-
-  it('should perform case-sensitive comparisons', () => {
+  it('should perform case-sensitive comparisons by default', () => {
     naturalCompare('a', 'A').should.be.greaterThan(0);
     naturalCompare('b', 'C').should.be.greaterThan(0);
   });
@@ -209,40 +251,29 @@ describe('naturalCompare()', () => {
       .sort(naturalCompare)
       .should.deepEqual(['1', '2', '9', '10', 'A', 'B', 'Š', 'X', 'a', 'z', 'u', 'õ', 'ä', 'Д']);
 
-    naturalCompare.alphabet = ''; // Don't mess up other tests
+    naturalCompare.alphabet = null; // Reset alphabet for other tests
   });
 
-});
 
+  describe('with {caseInsensitive: true}', () => {
 
-describe('naturalCompare.caseInsensitive()', () => {
+    it('should perform case-insensitive comparisons', () => {
+      naturalCompare('a', 'A', {caseInsensitive: true}).should.equal(0);
+      naturalCompare('b', 'C', {caseInsensitive: true}).should.be.lessThan(0);
 
-  it('should perform case-insensitive comparisons', () => {
-    naturalCompare.caseInsensitive('a', 'A').should.equal(0);
-    naturalCompare.caseInsensitive('b', 'C').should.be.lessThan(0);
-  });
+      ['C', 'B', 'a', 'd']
+        .sort((a, b) => naturalCompare(a, b, {caseInsensitive: true}))
+        .should.deepEqual(['a', 'B', 'C', 'd']);
+    });
 
-  it('should function correctly as the callback to array.sort()', () => {
-    ['C', 'B', 'a', 'd']
-      .sort(naturalCompare.caseInsensitive)
-      .should.deepEqual(['a', 'B', 'C', 'd']);
-  });
+    it('should compare strings using the provided alphabet', () => {
+      naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
 
-  it('should compare strings using the provided alphabet', () => {
-    naturalCompare.alphabet = 'ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜXYabdefghijklmnoprsšzžtuvõäöüxy';
+      ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
+        .sort((a, b) => naturalCompare(a, b, {caseInsensitive: true}))
+        .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
+    });
 
-    ['Д', 'a', 'ä', 'B', 'Š', 'X', 'Ü', 'õ', 'u', 'z', '1', '2', '9', '10']
-      .sort(naturalCompare.caseInsensitive)
-      .should.deepEqual(['1', '2', '9', '10', 'a', 'B', 'Š', 'z', 'u', 'õ', 'ä', 'Ü', 'X', 'Д']);
-  });
-
-});
-
-
-describe('naturalCompare.i', () => {
-
-  it('is an alias for naturalCompare.caseInsensitive', () => {
-    naturalCompare.i.should.equal(naturalCompare.caseInsensitive);
   });
 
 });
