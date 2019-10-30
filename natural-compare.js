@@ -61,7 +61,7 @@ function naturalCompare(a, b, opts) {
       }
 
       var difference = numEndA - numStartA - numEndB + numStartB; // numA length - numB length
-      if (difference) {
+      if (difference !== 0) {
         return difference;
       }
 
@@ -94,12 +94,12 @@ function naturalCompare(a, b, opts) {
     ++bIndex;
   }
 
-  if (aIndex >= lengthA && bIndex < lengthB && lengthA >= lengthB) {
-    return -1;
+  if (aIndex < lengthA) { // `b` is a substring of `a`
+    return 1;
   }
 
-  if (bIndex >= lengthB && aIndex < lengthA && lengthB >= lengthA) {
-    return 1;
+  if (bIndex < lengthB) { // `a` is a substring of `b`
+    return -1;
   }
 
   return lengthA - lengthB;
