@@ -3,6 +3,7 @@ node_js:
   - '13'
   - '12'
   - '10'
+after_success: npm run coveralls
 stages:
   - test
   - name: npm release
@@ -11,7 +12,8 @@ jobs:
   include:
     - stage: npm release
       install: skip
-      script: true # skip step with success exit code
+      script: skip
+      after_success: true # skip step with success exit code
       deploy:
         provider: npm
         email: nwoltman@outlook.com
