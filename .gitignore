@@ -16,6 +16,9 @@ coverage
 # Dependency directory
 node_modules
 
+# Benchmark lock file
+benchmark/package-lock.json
+
 # IDE / Text Editor files
 .vscode
 *.sublime-*

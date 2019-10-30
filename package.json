@@ -25,19 +25,23 @@
     "alphanumeric"
   ],
   "eslintIgnore": [
+    "benchmark/node_modules/",
     "coverage/"
   ],
   "nyc": {
-    "reporter": ["html", "text-summary"],
+    "reporter": [
+      "html",
+      "text-summary"
+    ],
     "check-coverage": true,
     "branches": 100,
     "lines": 100,
     "statements": 100
   },
   "devDependencies": {
-    "@nwoltman/eslint-config": "^0.4.0",
+    "@nwoltman/eslint-config": "^0.5.0",
     "coveralls": "^3.0.7",
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "should": "^13.2.3"
