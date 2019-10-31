@@ -14,11 +14,11 @@ function naturalCompare(a, b, opts) {
     throw new TypeError(`The second argument must be a string. Received type '${typeof b}'`);
   }
 
-  var alphabetIndexMap = defaultAlphabetIndexMap;
-  var lengthA = a.length;
-  var lengthB = b.length;
-  var aIndex = 0;
-  var bIndex = 0;
+  const lengthA = a.length;
+  const lengthB = b.length;
+  let indexA = 0;
+  let indexB = 0;
+  let alphabetIndexMap = defaultAlphabetIndexMap;
 
   if (opts) {
     if (opts.caseInsensitive) {
@@ -31,17 +31,17 @@ function naturalCompare(a, b, opts) {
     }
   }
 
-  while (aIndex < lengthA && bIndex < lengthB) {
-    var charCodeA = a.charCodeAt(aIndex);
-    var charCodeB = b.charCodeAt(bIndex);
+  while (indexA < lengthA && indexB < lengthB) {
+    let charCodeA = a.charCodeAt(indexA);
+    let charCodeB = b.charCodeAt(indexB);
 
     if (isNumberCode(charCodeA)) {
       if (!isNumberCode(charCodeB)) {
         return charCodeA - charCodeB;
       }
 
-      var numStartA = aIndex;
-      var numStartB = bIndex;
+      let numStartA = indexA;
+      let numStartB = indexB;
 
       while (charCodeA === 48 && ++numStartA < lengthA) {
         charCodeA = a.charCodeAt(numStartA);
@@ -50,8 +50,8 @@ function naturalCompare(a, b, opts) {
         charCodeB = b.charCodeAt(numStartB);
       }
 
-      var numEndA = numStartA;
-      var numEndB = numStartB;
+      let numEndA = numStartA;
+      let numEndB = numStartB;
 
       while (numEndA < lengthA && isNumberCode(a.charCodeAt(numEndA))) {
         ++numEndA;
@@ -60,20 +60,20 @@ function naturalCompare(a, b, opts) {
         ++numEndB;
       }
 
-      var difference = numEndA - numStartA - numEndB + numStartB; // numA length - numB length
+      let difference = numEndA - numStartA - numEndB + numStartB; // numA length - numB length
       if (difference !== 0) {
         return difference;
       }
 
       while (numStartA < numEndA) {
         difference = a.charCodeAt(numStartA++) - b.charCodeAt(numStartB++);
-        if (difference) {
+        if (difference !== 0) {
           return difference;
         }
       }
 
-      aIndex = numEndA;
-      bIndex = numEndB;
+      indexA = numEndA;
+      indexB = numEndB;
       continue;
     }
 
@@ -90,15 +90,15 @@ function naturalCompare(a, b, opts) {
       return charCodeA - charCodeB;
     }
 
-    ++aIndex;
-    ++bIndex;
+    ++indexA;
+    ++indexB;
   }
 
-  if (aIndex < lengthA) { // `b` is a substring of `a`
+  if (indexA < lengthA) { // `b` is a substring of `a`
     return 1;
   }
 
-  if (bIndex < lengthB) { // `a` is a substring of `b`
+  if (indexB < lengthB) { // `a` is a substring of `b`
     return -1;
   }
 
