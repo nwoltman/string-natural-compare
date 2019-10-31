@@ -3,7 +3,7 @@
 const defaultAlphabetIndexMap = [];
 
 function isNumberCode(code) {
-  return code >= 48 && code <= 57;
+  return code >= 48/* '0' */ && code <= 57/* '9' */;
 }
 
 function naturalCompare(a, b, opts) {
@@ -43,10 +43,10 @@ function naturalCompare(a, b, opts) {
       let numStartA = indexA;
       let numStartB = indexB;
 
-      while (charCodeA === 48 && ++numStartA < lengthA) {
+      while (charCodeA === 48/* '0' */ && ++numStartA < lengthA) {
         charCodeA = a.charCodeAt(numStartA);
       }
-      while (charCodeB === 48 && ++numStartB < lengthB) {
+      while (charCodeB === 48/* '0' */ && ++numStartB < lengthB) {
         charCodeB = b.charCodeAt(numStartB);
       }
 
