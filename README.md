@@ -1,11 +1,11 @@
 # String Natural Compare
 
-Compare alphanumeric strings the same way a human would, using a natural order algorithm
-
 [![NPM Version](https://img.shields.io/npm/v/string-natural-compare.svg)](https://www.npmjs.com/package/string-natural-compare)
 [![Build Status](https://travis-ci.org/nwoltman/string-natural-compare.svg?branch=master)](https://travis-ci.org/nwoltman/string-natural-compare)
 [![Coverage Status](https://coveralls.io/repos/nwoltman/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/nwoltman/string-natural-compare?branch=master)
 [![Dependencies Status](https://img.shields.io/david/nwoltman/string-natural-compare)](https://david-dm.org/nwoltman/string-natural-compare)
+
+Compare alphanumeric strings the same way a human would, using a natural order algorithm (originally known as the [alphanum algorithm](http://davekoelle.com/alphanum.html)) where numeric characters are sorted based on their numeric values rather than their ASCII values.
 
 ```
 Standard sorting:   Natural order sorting:
