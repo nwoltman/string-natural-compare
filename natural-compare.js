@@ -19,6 +19,7 @@ function naturalCompare(a, b, opts) {
   let indexA = 0;
   let indexB = 0;
   let alphabetIndexMap = defaultAlphabetIndexMap;
+  let firstDifferenceInLeadingZeros = 0;
 
   if (opts) {
     if (opts.caseInsensitive) {
@@ -48,6 +49,10 @@ function naturalCompare(a, b, opts) {
       }
       while (charCodeB === 48/* '0' */ && ++numStartB < lengthB) {
         charCodeB = b.charCodeAt(numStartB);
+      }
+
+      if (numStartA !== numStartB && firstDifferenceInLeadingZeros === 0) {
+        firstDifferenceInLeadingZeros = numStartA - numStartB;
       }
 
       let numEndA = numStartA;
@@ -102,7 +107,7 @@ function naturalCompare(a, b, opts) {
     return -1;
   }
 
-  return lengthA - lengthB;
+  return firstDifferenceInLeadingZeros;
 }
 
 const alphabetIndexMapCache = {};
