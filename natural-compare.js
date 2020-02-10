@@ -136,4 +136,6 @@ function buildAlphabetIndexMap(alphabet) {
   return indexMap;
 }
 
+naturalCompare.caseInsensitive = (a, b, opt) => naturalCompare(a, b, {...opt, caseInsensitive: true});
+
 module.exports = naturalCompare;
