@@ -26,7 +26,7 @@ This module can compare strings containing any size of number and is heavily tes
 ## Installation
 
 ```sh
-npm install string-natural-compare --save
+npm install string-natural-compare
 # or
 yarn add string-natural-compare
 ```
