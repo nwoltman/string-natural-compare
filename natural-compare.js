@@ -136,4 +136,6 @@ function buildAlphabetIndexMap(alphabet) {
   return indexMap;
 }
 
+naturalCompare.default = naturalCompare;
+
 module.exports = naturalCompare;
