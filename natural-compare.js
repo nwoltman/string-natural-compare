@@ -8,10 +8,10 @@ function isNumberCode(code) {
 
 function naturalCompare(a, b, opts) {
   if (typeof a !== 'string') {
-    throw new TypeError(`The first argument must be a string. Received type '${typeof a}'`);
+    throw new TypeError("The first argument must be a string. Received type '" + (typeof a) + "'");
   }
   if (typeof b !== 'string') {
-    throw new TypeError(`The second argument must be a string. Received type '${typeof b}'`);
+    throw new TypeError("The second argument must be a string. Received type '" + (typeof b) + "'");
   }
 
   const lengthA = a.length;
