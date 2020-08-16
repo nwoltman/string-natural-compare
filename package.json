@@ -31,6 +31,7 @@
   "nyc": {
     "reporter": [
       "html",
+      "lcov",
       "text-summary"
     ],
     "check-coverage": true,
@@ -40,7 +41,6 @@
   },
   "devDependencies": {
     "@nwoltman/eslint-config": "^0.6.0",
-    "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "mocha": "^7.0.0",
     "nyc": "^15.0.0",
@@ -48,7 +48,6 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "eslint . && nyc mocha",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "test": "eslint . && nyc mocha"
   }
 }
