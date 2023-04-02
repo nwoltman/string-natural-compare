@@ -1,7 +1,7 @@
 # String Natural Compare
 
 [![NPM Version](https://img.shields.io/npm/v/string-natural-compare.svg)](https://www.npmjs.com/package/string-natural-compare)
-[![Build Status](https://travis-ci.org/nwoltman/string-natural-compare.svg?branch=master)](https://travis-ci.org/nwoltman/string-natural-compare)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/nwoltman/string-natural-compare/ci.yml?branch=master)](https://github.com/nwoltman/string-natural-compare/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/nwoltman/string-natural-compare/badge.svg?branch=master)](https://coveralls.io/r/nwoltman/string-natural-compare?branch=master)
 
 Compare alphanumeric strings the same way a human would, using a natural order algorithm (originally known as the [alphanum algorithm](http://davekoelle.com/alphanum.html)) where numeric characters are sorted based on their numeric values rather than their ASCII values.
