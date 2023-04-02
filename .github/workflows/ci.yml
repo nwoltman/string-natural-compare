@@ -11,13 +11,13 @@ jobs:
     name: Test - Node ${{ matrix.node-version }}
     strategy:
       matrix:
-        node-version: [10, 12, 14]
+        node-version: [16, 18, 19]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
@@ -47,11 +47,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
       - run: npm publish
         env:
