@@ -84,10 +84,8 @@ function naturalCompare(a, b, opts) {
 
     if (charCodeA !== charCodeB) {
       if (
-        charCodeA < alphabetIndexMap.length &&
-        charCodeB < alphabetIndexMap.length &&
-        alphabetIndexMap[charCodeA] !== -1 &&
-        alphabetIndexMap[charCodeB] !== -1
+        alphabetIndexMap[charCodeA] !== undefined &&
+        alphabetIndexMap[charCodeB] !== undefined
       ) {
         return alphabetIndexMap[charCodeA] - alphabetIndexMap[charCodeB];
       }
@@ -119,14 +117,6 @@ function buildAlphabetIndexMap(alphabet) {
   }
 
   const indexMap = [];
-  const maxCharCode = alphabet.split('').reduce((maxCode, char) => {
-    return Math.max(maxCode, char.charCodeAt(0));
-  }, 0);
-
-  for (let i = 0; i <= maxCharCode; i++) {
-    indexMap.push(-1);
-  }
-
   for (let i = 0; i < alphabet.length; i++) {
     indexMap[alphabet.charCodeAt(i)] = i;
   }
