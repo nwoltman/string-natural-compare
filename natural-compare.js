@@ -1,6 +1,7 @@
 'use strict';
 
 const defaultAlphabetIndexMap = [];
+defaultAlphabetIndexMap.maxCode = 0;
 
 function isNumberCode(code) {
   return code >= 48/* '0' */ && code <= 57/* '9' */;
@@ -82,15 +83,17 @@ function naturalCompare(a, b, opts) {
       continue;
     }
 
-    if (charCodeA !== charCodeB) {
-      if (
-        alphabetIndexMap[charCodeA] !== undefined &&
-        alphabetIndexMap[charCodeB] !== undefined
-      ) {
-        return alphabetIndexMap[charCodeA] - alphabetIndexMap[charCodeB];
-      }
+    let resolvedCodeA = alphabetIndexMap[charCodeA];
+    if (resolvedCodeA === undefined) {
+      resolvedCodeA = charCodeA + alphabetIndexMap.maxCode;
+    }
+    let resolvedCodeB = alphabetIndexMap[charCodeB];
+    if (resolvedCodeB === undefined) {
+      resolvedCodeB = charCodeB + alphabetIndexMap.maxCode;
+    }
 
-      return charCodeA - charCodeB;
+    if (resolvedCodeA !== resolvedCodeB) {
+      return resolvedCodeA - resolvedCodeB;
     }
 
     ++indexA;
@@ -117,8 +120,14 @@ function buildAlphabetIndexMap(alphabet) {
   }
 
   const indexMap = [];
+  indexMap.maxCode = 0;
+
   for (let i = 0; i < alphabet.length; i++) {
-    indexMap[alphabet.charCodeAt(i)] = i;
+    const code = alphabet.charCodeAt(i);
+    indexMap[code] = i;
+    if (code > indexMap.maxCode) {
+      indexMap.maxCode = code;
+    }
   }
 
   alphabetIndexMapCache[alphabet] = indexMap;
