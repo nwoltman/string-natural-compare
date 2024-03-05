@@ -261,6 +261,13 @@ describe('naturalCompare()', () => {
     naturalCompare.alphabet = null; // Reset alphabet for other tests
   });
 
+  it('should sort letters outside of provided alphabet last', () => {
+    const opts = {
+      alphabet: 'AÁBCDÐEÉFGHIÍJKLMNOÓPQRSTUÚVWXYÝZÞÆÖaábcdðeéfghiíjklmnoópqrstuúvwxyýzþæö',
+    };
+    ['ä', 'ö'].sort((a, b) => naturalCompare(a, b, opts)).should.deepEqual(['ö', 'ä']);
+  });
+
 
   describe('with {caseInsensitive: true}', () => {
 
